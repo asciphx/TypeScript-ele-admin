@@ -7,7 +7,8 @@ const socket=require("../util/websocket");
 export class AdminC extends C{
     private AdminRepository = getRepository(TAdmin);//html(窗口变化)iframe(容器开关)static(纯静态资源页，不含后端)
     async webkit() {return Promise.resolve(socket.users);}//获取socket用户列表
-    async index(req: Request, res: Response){res.render("index",{A:"MVC超级系统",user:req.session.user,nick:req.session.nick,photo:req.session.photo,err:req.flash('err')})}//登陆html
+    async index(req: Request, res: Response){res.render("index",{A:"MVC超级系统",
+    user:req.session.user,nick:req.session.nick,photo:req.session.photo,err:req.flash('err')})}//登陆html页面，需要防止？后缀必须写死
     async ejs(req: Request, res: Response){this.html(req,res,{A:"MVC超级系统",B:"个人主页",C:"功能列表",D:"系统中心(待更新！)",a:"首页",b:"我的博客",
     c:"修改密码",d:"用户表",e:"图形化日志",f:"许愿贴纸",g:"md2pdf",h:"winXP",i:"旋转魔方"});}//H-ui-html,static
     async main(req: Request, res: Response){this.html(req,res);}//首页iframe
