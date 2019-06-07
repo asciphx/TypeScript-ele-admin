@@ -1,0 +1,98 @@
+<%include ../../taglib.ejs %>
+<link rel="StyleSheet" href="../../resource/h-ui/mine.css" type="text/css" />
+<html>
+<head>
+<title>信息内容功能</title>
+</head>
+<body>
+	<form id="form1" name="form1" action="" method="post">
+			<table class="mobile" style="width: 95%;max-width:300px;position: fixed;margin: 0 23%;background: aliceblue;">
+				<tr class="pageheader">
+					<td colspan="2"><strong>信息处理[密碼最大長度15位！]</strong></td>
+				</tr>
+				<tr height="25">
+					<td class="outDetail" style="width: 30%">旧密码： <label
+						style="font-weight: bold; color: red"> * </label></td>
+					<td class="outDetail2"><input type="password" id="oldPassword"
+						 name="oldPassword" maxlength=15/></td>
+				</tr>
+				<tr height="25">
+					<td class="outDetail" style="width: 30%">新密码： <label
+						style="font-weight: bold; color: red"> * </label></td>
+					<td class="outDetail2"><input type="password" id="newPassword"
+						 name="newPassword" maxlength=15/></td>
+				</tr>
+				<tr height="25">
+					<td class="outDetail" style="width: 30%">新密码确认： <label
+						style="font-weight: bold; color: red"> * </label></td>
+					<td class="outDetail2"><input type="password" id="newPasswordConfirm"
+						 name="newPasswordConfirm" maxlength=15/></td>
+				</tr>
+				<tr height="25"><td class="outDetail2"><p align="center"><input type="button" class="btn" value="保  存"
+					onclick="save(this);" /></p></td>
+				</tr>
+				
+			</table>
+	</form><canvas id="mom" style="background:#111"></canvas>
+    <script>
+        var canvas = document.getElementById("mom");
+		var context = canvas.getContext("2d"); 
+        var W = window.parent.innerWidth;
+        var H = window.parent.innerHeight-100;
+		if( window.parent.document.querySelector('body > div.cl.Hui-main > aside').style.display!='none'&&W>800){
+			W=W-220;
+		}
+        canvas.width = W;
+        canvas.height = H;
+        var fontSize = 16;
+        var colunms = Math.floor(W / fontSize);
+        var drops = [];
+        for (var i = 0; i < colunms; i++) {
+            drops[i] = 1;
+        }
+        var str = "JavaScript function(){}";
+        function draw() {
+            context.fillStyle = "rgba(0,0,0,0.05)";
+            context.fillRect(0, 0, W, H);
+            context.font = "700 " + fontSize + "px  微软雅黑";
+            context.fillStyle =randColor();
+            for (var i = 0; i < colunms; i++) {
+                var index = Math.floor(Math.random() * str.length);
+                var x = i * fontSize;
+                var y = drops[i] * fontSize;
+                context.fillText(str[index], x, y);
+                if (y >= canvas.height && Math.random() > 0.99) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        };
+        function randColor() {
+            return "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
+        }
+        draw();
+        setInterval(draw, 20);
+    </script>
+</body>
+<script type="text/javascript">
+	function save(src) {
+		var oldPassword = $("#oldPassword").val();
+		var newPassword = $("#newPassword").val();
+		var newPasswordConfirm = $("#newPasswordConfirm").val();
+		if(newPassword.length<6){alert("新密碼長度必須大於5位！");return false;}
+		if(oldPassword==''){alert('旧密码不能为空');return false;}
+		if(newPassword==''){alert('新密码不能为空');return false;}
+		if(newPasswordConfirm==''){alert('确认密码不能为空');return false;}
+		if(newPasswordConfirm!=newPassword){alert('两次密码输入不一致');return false;}
+		$.post("changePassword.html", $("#form1").serializeArray(), function(result) {
+			result=JSON.parse(result);
+			if (result.status == "true" || result.status == true) {
+				alert('修改成功');
+				window.location.reload();
+			} else {
+				alert('旧密码不对，请重新输入');
+			}
+		});
+	}
+</script>
+</html>

@@ -1,0 +1,1263 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-type;X-UA-Compatible" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeWallet</title>
+<link rel="stylesheet" href="../../css/imageAuthor.css">
+<link rel="stylesheet" href="../../css/page.css">
+<link rel="StyleSheet" href="../../resource/h-ui/mine.css" type="text/css" />
+<link rel="stylesheet" href="log.css">
+<style>
+@media only screen and (max-width:800px){#container{height:450px;}}
+@media only screen and (min-width:800px){#container{height:550px;}}
+</style>
+<%include ../../taglib.ejs %>
+<link href="../../resource/bootstrap.css" rel="stylesheet">
+</head>
+<!-- UPDATE `t_template` SET sex = REPLACE(sex,"女","1");ul>li>a
+ul>(li>a[click=#])*3
+ul>(li>a[href=#])*3
+ul>(li>a)*3
+1、target="_self"表示：将链接的画面内容，显示在目前的视窗中。(内定值) 。 即：同窗口打开。
+2、target="_parent"表示：将链接的画面内容，当成文件的上一个画面。即：当前窗口打开。
+3、target="_top"表示：将框架中链接的画面内容，显示在没有框架的视窗中（即除去了框架)。即：顶端打开窗口。
+4、target="_blank"表示：将链接的画面内容，在新的浏览视窗中打开。即：打开新窗口。 -->
+<body class= "mobile" style="overflow-y:visible;margin:0;padding:0">
+        <input type="hidden" value="" name="flag"/>
+        <table class= "table">
+            <script type="text/javascript" src="..\..\js\echarts.js"></script>
+            <script type="text/javascript" src="..\..\js\ecWordcloud.js"></script>
+            <script type="text/javascript" src="..\..\js\md5.js"></script>
+            <script type="text/javascript" src="..\..\js\page.js"></script>
+            <tr class= "biao_ti" height="6%">
+                <td colspan= "2">
+                <button id="userPhotoGroup"onclick="window.parent.frames['log'].frameElement.src='obj/person/log';">↻</button>
+                <script>_P_("0","selected","blood",0,"blood","input-text")</script>
+                <script>_P_("1,2","checked","ID_TYPE",2,"blood","xuanX textarea")</script>
+                <script>_P_("P","checked","USER_TYPE",1,"blood","input-text")</script></td>
+            </tr>
+            <script>A.clean("table");</script>
+        </table>
+        <div id="container" style="min-width:400px;"></div>
+        <script type="text/javascript">
+            var dom = document.getElementById("container");
+            if( window.parent.document.querySelector('body > div.cl.Hui-main > aside').style.display!='none'){
+                dom.style.width=window.parent.innerWidth-250+"px";
+            }else{
+                dom.style.width=window.parent.innerWidth-10+"px";
+             }
+            var myChart = echarts.init(dom);dom=Math.floor(window.parent.innerWidth/400);
+            var weatherIcons = {
+                'Sunny': '../../e/i/Sunny.png',
+                'Cloudy': '../../e/i/Cloudy.png',
+                'Showers': '../../e/i/Showers.png'
+            };//1上，6在下
+            var directionMap = {};
+            echarts.util.each(
+                ['W', 'WSW', 'SW', 'SSW', 'S', 'SSE', 'SE', 'ESE', 'E', 'ENE', 'NE', 'NNE', 'N', 'NNW', 'NW', 'WNW'],
+                function (name, index) {
+                    directionMap[name] = Math.PI / 8 * index;
+                }
+            );
+            var data1 = echarts.util.map([{"time": "2017-06-27T11:00:00.000Z","windSpeed": 9,"R": "NNW","waveHeight": 2.64},{"time": "2017-06-27T12:30:00.000Z","windSpeed": 10,"R": "NNW","waveHeight": 2.57},{"time": "2017-06-27T14:00:00.000Z","windSpeed": 12,"R": "NNW","waveHeight": 2.49},{"time": "2017-06-27T15:30:00.000Z","windSpeed": 12,"R": "NNW","waveHeight": 2.44},{"time": "2017-06-27T17:00:00.000Z","windSpeed": 11,"R": "NNW","waveHeight": 2.38},{"time": "2017-06-27T18:30:00.000Z","windSpeed": 10,"R": "NNW","waveHeight": 2.34},{"time": "2017-06-27T20:00:00.000Z","windSpeed": 10,"R": "N","waveHeight": 2.3},{"time": "2017-06-27T21:30:00.000Z","windSpeed": 11,"R": "NNW","waveHeight": 2.26},{"time": "2017-06-27T23:00:00.000Z","windSpeed": 12,"R": "NNW","waveHeight": 2.22},{"time": "2017-06-28T00:30:00.000Z","windSpeed": 12,"R": "N","waveHeight": 2.18},{"time": "2017-06-28T02:00:00.000Z","windSpeed": 12,"R": "N","waveHeight": 2.13},{"time": "2017-06-28T03:30:00.000Z","windSpeed": 12,"R": "N","waveHeight": 2.09},{"time": "2017-06-28T05:00:00.000Z","windSpeed": 12,"R": "NNE","waveHeight": 2.04},{"time": "2017-06-28T06:30:00.000Z","windSpeed": 10,"R": "N","waveHeight": 2.01},{"time": "2017-06-28T08:00:00.000Z","windSpeed": 9,"R": "N","waveHeight": 1.99},{"time": "2017-06-28T09:30:00.000Z","windSpeed": 8,"R": "NNW","waveHeight": 2},{"time": "2017-06-28T11:00:00.000Z","windSpeed": 8,"R": "NW","waveHeight": 2.01},{"time": "2017-06-28T12:30:00.000Z","windSpeed": 8,"R": "NW","waveHeight": 2.06},{"time": "2017-06-28T14:00:00.000Z","windSpeed": 9,"R": "WNW","waveHeight": 2.12},{"time": "2017-06-28T15:30:00.000Z","windSpeed": 10,"R": "WNW","waveHeight": 2.19},{"time": "2017-06-28T17:00:00.000Z","windSpeed": 11,"R": "WNW","waveHeight": 2.27},{"time": "2017-06-28T18:30:00.000Z","windSpeed": 12,"R": "WNW","waveHeight": 2.33},{"time": "2017-06-28T20:00:00.000Z","windSpeed": 13,"R": "NW","waveHeight": 2.39},{"time": "2017-06-28T21:30:00.000Z","windSpeed": 13,"R": "NW","waveHeight": 2.43},{"time": "2017-06-28T23:00:00.000Z","windSpeed": 14,"R": "NW","waveHeight": 2.46},{"time": "2017-06-29T00:30:00.000Z","windSpeed": 16,"R": "NW","waveHeight": 2.48},{"time": "2017-06-29T02:00:00.000Z","windSpeed": 18,"R": "NNW","waveHeight": 2.49},{"time": "2017-06-29T03:30:00.000Z","windSpeed": 20,"R": "WNW","waveHeight": 2.53},{"time": "2017-06-29T05:00:00.000Z","windSpeed": 22,"R": "W","waveHeight": 2.58},{"time": "2017-06-29T06:30:00.000Z","windSpeed": 26,"R": "WSW","waveHeight": 2.89},{"time": "2017-06-29T08:00:00.000Z","windSpeed": 30,"R": "WSW","waveHeight": 3.21},{"time": "2017-06-29T09:30:00.000Z","windSpeed": 30,"R": "SW","waveHeight": 3.58},{"time": "2017-06-29T11:00:00.000Z","windSpeed": 29,"R": "SW","waveHeight": 3.94},{"time": "2017-06-29T12:30:00.000Z","windSpeed": 29,"R": "SW","waveHeight": 4.08},{"time": "2017-06-29T14:00:00.000Z","windSpeed": 29,"R": "SW","waveHeight": 4.22},{"time": "2017-06-29T15:30:00.000Z","windSpeed": 28,"R": "SW","waveHeight": 4.25},{"time": "2017-06-29T17:00:00.000Z","windSpeed": 28,"R": "SW","waveHeight": 4.28},{"time": "2017-06-29T18:30:00.000Z","windSpeed": 29,"R": "SSW","waveHeight": 4.37},{"time": "2017-06-29T20:00:00.000Z","windSpeed": 30,"R": "SSW","waveHeight": 4.45},{"time": "2017-06-29T21:30:00.000Z","windSpeed": 29,"R": "SSW","waveHeight": 4.45},{"time": "2017-06-29T23:00:00.000Z","windSpeed": 27,"R": "SSW","waveHeight": 4.45},{"time": "2017-06-30T00:30:00.000Z","windSpeed": 26,"R": "SSW","waveHeight": 4.32},{"time": "2017-06-30T02:00:00.000Z","windSpeed": 25,"R": "SSW","waveHeight": 4.2},{"time": "2017-06-30T03:30:00.000Z","windSpeed": 22,"R": "SSW","waveHeight": 4.01},{"time": "2017-06-30T05:00:00.000Z","windSpeed": 20,"R": "SSW","waveHeight": 3.82},{"time": "2017-06-30T06:30:00.000Z","windSpeed": 19,"R": "SSW","waveHeight": 3.66},{"time": "2017-06-30T08:00:00.000Z","windSpeed": 19,"R": "SSW","waveHeight": 3.51},{"time": "2017-06-30T09:30:00.000Z","windSpeed": 17,"R": "SSW","waveHeight": 3.37},{"time": "2017-06-30T11:00:00.000Z","windSpeed": 14,"R": "SSW","waveHeight": 3.22},{"time": "2017-06-30T12:30:00.000Z","windSpeed": 12,"R": "SSW","waveHeight": 3.09},{"time": "2017-06-30T14:00:00.000Z","windSpeed": 10,"R": "SW","waveHeight": 2.96},{"time": "2017-06-30T15:30:00.000Z","windSpeed": 9,"R": "WSW","waveHeight": 2.83},{"time": "2017-06-30T17:00:00.000Z","windSpeed": 9,"R": "W","waveHeight": 2.7},{"time": "2017-06-30T18:30:00.000Z","windSpeed": 10,"R": "W","waveHeight": 2.58},{"time": "2017-06-30T20:00:00.000Z","windSpeed": 10,"R": "WNW","waveHeight": 2.45},{"time": "2017-06-30T21:30:00.000Z","windSpeed": 10,"R": "WNW","waveHeight": 2.33},{"time": "2017-06-30T23:00:00.000Z","windSpeed": 10,"R": "WNW","waveHeight": 2.21},{"time": "2017-07-01T00:30:00.000Z","windSpeed": 10,"R": "NW","waveHeight": 2.13},{"time": "2017-07-01T02:00:00.000Z","windSpeed": 10,"R": "NW","waveHeight": 2.05},{"time": "2017-07-01T03:30:00.000Z","windSpeed": 10,"R": "NNW","waveHeight": 2.02},{"time": "2017-07-01T05:00:00.000Z","windSpeed": 10,"R": "N","waveHeight": 2},{"time": "2017-07-01T06:30:00.000Z","windSpeed": 10,"R": "N","waveHeight": 2},{"time": "2017-07-01T08:00:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.99},{"time": "2017-07-01T09:30:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.98},{"time": "2017-07-01T11:00:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.96},{"time": "2017-07-01T12:30:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.94},{"time": "2017-07-01T14:00:00.000Z","windSpeed": 11,"R": "N","waveHeight": 1.93},{"time": "2017-07-01T15:30:00.000Z","windSpeed": 11,"R": "N","waveHeight": 1.93},{"time": "2017-07-01T17:00:00.000Z","windSpeed": 11,"R": "NNW","waveHeight": 1.93},{"time": "2017-07-01T18:30:00.000Z","windSpeed": 10,"R": "NNW","waveHeight": 1.94},{"time": "2017-07-01T20:00:00.000Z","windSpeed": 10,"R": "NNW","waveHeight": 1.96},{"time": "2017-07-01T21:30:00.000Z","windSpeed": 10,"R": "NNW","waveHeight": 1.97},{"time": "2017-07-01T23:00:00.000Z","windSpeed": 10,"R": "NNW","waveHeight": 1.97},{"time": "2017-07-02T00:30:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.96},{"time": "2017-07-02T02:00:00.000Z","windSpeed": 11,"R": "N","waveHeight": 1.94},{"time": "2017-07-02T03:30:00.000Z","windSpeed": 11,"R": "N","waveHeight": 1.91},{"time": "2017-07-02T05:00:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.88},{"time": "2017-07-02T06:30:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.84},{"time": "2017-07-02T08:00:00.000Z","windSpeed": 10,"R": "N","waveHeight": 1.8},{"time": "2017-07-02T09:30:00.000Z","windSpeed": 11,"R": "N","waveHeight": 1.78},{"time": "2017-07-02T11:00:00.000Z","windSpeed": 11,"R": "N","waveHeight": 1.76},{"time": "2017-07-02T12:30:00.000Z","windSpeed": 12,"R": "N","waveHeight": 1.76},{"time": "2017-07-02T14:00:00.000Z","windSpeed": 13,"R": "N","waveHeight": 1.77},{"time": "2017-07-02T15:30:00.000Z","windSpeed": 14,"R": "N","waveHeight": 1.81},{"time": "2017-07-02T17:00:00.000Z","windSpeed": 15,"R": "N","waveHeight": 1.85},{"time": "2017-07-02T18:30:00.000Z","windSpeed": 14,"R": "N","waveHeight": 1.86},{"time": "2017-07-02T20:00:00.000Z","windSpeed": 13,"R": "N","waveHeight": 1.87},{"time": "2017-07-02T21:30:00.000Z","windSpeed": 13,"R": "N","waveHeight": 1.88},{"time": "2017-07-02T23:00:00.000Z","windSpeed": 13,"R": "N","waveHeight": 1.9},{"time": "2017-07-03T00:30:00.000Z","windSpeed": 13,"R": "N","waveHeight": 1.91},{"time": "2017-07-03T02:00:00.000Z","windSpeed": 13,"R": "N","waveHeight": 1.93},{"time": "2017-07-03T03:30:00.000Z","windSpeed": 13,"R": "N","waveHeight": 1.96},{"time": "2017-07-03T05:00:00.000Z","windSpeed": 13,"R": "NNE","waveHeight": 1.99},{"time": "2017-07-03T06:30:00.000Z","windSpeed": 12,"R": "NNE","waveHeight": 2.03},{"time": "2017-07-03T08:00:00.000Z","windSpeed": 11,"R": "NNE","waveHeight": 2.08},{"time": "2017-07-03T09:30:00.000Z","windSpeed": 11,"R": "N","waveHeight": 2.12},{"time": "2017-07-03T11:00:00.000Z","windSpeed": 11,"R": "NNW","waveHeight": 2.16},{"time": "2017-07-03T12:30:00.000Z","windSpeed": 15,"R": "N","waveHeight": 2.22},{"time": "2017-07-03T14:00:00.000Z","windSpeed": 20,"R": "N","waveHeight": 2.27},{"time": "2017-07-03T15:30:00.000Z","windSpeed": 20,"R": "N","waveHeight": 2.33},{"time": "2017-07-03T17:00:00.000Z","windSpeed": 19,"R": "N","waveHeight": 2.39},{"time": "2017-07-03T18:30:00.000Z","windSpeed": 17,"R": "N","waveHeight": 2.44},{"time": "2017-07-03T20:00:00.000Z","windSpeed": 15,"R": "N","waveHeight": 2.49},{"time": "2017-07-03T21:30:00.000Z","windSpeed": 16,"R": "NNW","waveHeight": 2.49},{"time": "2017-07-03T23:00:00.000Z","windSpeed": 17,"R": "WNW","waveHeight": 2.49},{"time": "2017-07-04T00:30:00.000Z","windSpeed": 18,"R": "W","waveHeight": 2.47},{"time": "2017-07-04T02:00:00.000Z","windSpeed": 20,"R": "SW","waveHeight": 2.44},{"time": "2017-07-04T03:30:00.000Z","windSpeed": 21,"R": "SW","waveHeight": 2.5},{"time": "2017-07-04T05:00:00.000Z","windSpeed": 21,"R": "WSW","waveHeight": 2.56},{"time": "2017-07-04T06:30:00.000Z","windSpeed": 22,"R": "WSW","waveHeight": 2.69},{"time": "2017-07-04T08:00:00.000Z","windSpeed": 22,"R": "WSW","waveHeight": 2.83},{"time": "2017-07-04T09:30:00.000Z","windSpeed": 23,"R": "WSW","waveHeight": 2.94},{"time": "2017-07-04T11:00:00.000Z","windSpeed": 23,"R": "WSW","waveHeight": 3.06},{"time": "2017-07-04T12:30:00.000Z","windSpeed": 24,"R": "WSW","waveHeight": 3.06},{"time": "2017-07-04T14:00:00.000Z","windSpeed": 24,"R": "SW","waveHeight": 3.06},{"time": "2017-07-04T15:30:00.000Z","windSpeed": 25,"R": "SW","waveHeight": 3.04},{"time": "2017-07-04T17:00:00.000Z","windSpeed": 25,"R": "SW","waveHeight": 3.03},{"time": "2017-07-04T18:30:00.000Z","windSpeed": 26,"R": "SW","waveHeight": 3},{"time": "2017-07-04T20:00:00.000Z","windSpeed": 26,"R": "SW","waveHeight": 2.97}], function (entry) {
+                return [entry.time, entry.windSpeed, entry.R, entry.waveHeight];
+            });
+            var weatherData = echarts.util.map([{"localDate": "2017-06-28","day": "Wednesday","minTemp": 4,"maxTemp": 13,"shortDesc": "Partly cloudy.","skyIcon": "Cloudy","weatherIcon": "MostlySunnyPartlyCloudy","probabilityPrecip": 0,"rangePrecipText": "0 to 1 mm","sunrise": "768","sunset": "1673","moonPhase": 0.682,"tides": "4,6,18,0.3,L,13,5,1.26,H,18,24,0.94,L,23,57,1.41,H"},{"localDate": "2017-06-29","day": "Thursday","minTemp": 5,"maxTemp": 11,"shortDesc": "Showers.","skyIcon": "Showers","weatherIcon": "Shower","probabilityPrecip": 70,"rangePrecipText": "0 to 1 mm","sunrise": "768","sunset": "1673","moonPhase": 0.901,"tides": "4,7,11,0.38,L,13,52,1.29,H,19,32,0.89,L"},{"localDate": "2017-06-30","day": "Friday","minTemp": 3,"maxTemp": 11,"shortDesc": "Shower or two.","skyIcon": "Showers","weatherIcon": "Shower","probabilityPrecip": 70,"rangePrecipText": "0 to 1 mm","sunrise": "768","sunset": "1675","moonPhase": 1.112,"tides": "4,1,0,1.3,H,8,0,0.48,L,14,34,1.31,H,20,41,0.84,L"},{"localDate": "2017-07-01","day": "Saturday","minTemp": 1,"maxTemp": 11,"shortDesc": "Mostly sunny.","skyIcon": "Sunny","weatherIcon": "MostlySunnyPartlyCloudy","probabilityPrecip": 0,"rangePrecipText": "","sunrise": "768","sunset": "1675","moonPhase": 1.315,"tides": "4,2,3,1.19,H,8,42,0.58,L,15,13,1.33,H,21,47,0.79,L"},{"localDate": "2017-07-02","day": "Sunday","minTemp": 2,"maxTemp": 13,"shortDesc": "Mostly sunny.","skyIcon": "Sunny","weatherIcon": "MostlySunnyPartlyCloudy","probabilityPrecip": 0,"rangePrecipText": "","sunrise": "768","sunset": "1676","moonPhase": 1.513,"tides": "4,3,8,1.1,H,9,16,0.67,L,15,48,1.35,H,22,49,0.74,L"},{"localDate": "2017-07-03","day": "Monday","minTemp": 3,"maxTemp": 12,"shortDesc": "Mostly sunny.","skyIcon": "Sunny","weatherIcon": "MostlySunnyPartlyCloudy","probabilityPrecip": 20,"rangePrecipText": "0 to 1 mm","sunrise": "768","sunset": "1676","moonPhase": 1.898,"tides": "4,4,15,1.03,H,9,43,0.75,L,16,20,1.37,H,23,41,0.69,L"},{"localDate": "2017-07-04","day": "Tuesday","minTemp": 5,"maxTemp": 12,"shortDesc": "Shower or two.","skyIcon": "Showers","weatherIcon": "Shower","probabilityPrecip": 50,"rangePrecipText": "0 to 2 mm","sunrise": "768","sunset": "1678","moonPhase": 2.088,"tides": "4,5,19,1,H,10,0,0.81,L,16,51,1.39,H"}], function (entry) {
+                return [entry.localDate, 0, weatherIcons[entry.skyIcon], entry.minTemp, entry.maxTemp];
+            });
+            var dims = {
+                time: 0,
+                windSpeed: 1,
+                R: 2,
+                waveHeight: 3,
+                weatherIcon: 2,
+                minTemp: 3,
+                maxTemp: 4
+            };
+            var arrowSize = 18;
+            var weatherIconSize = 45;
+            function renderArrow(param, api) {
+                var point = api.coord([
+                    api.value(dims.time),
+                    api.value(dims.windSpeed)
+                ]);
+
+                return {
+                    type: 'path',
+                    shape: {
+                        pathData: 'M31 16l-15-15v9h-26v12h26v9z',
+                        x: -arrowSize / 2,
+                        y: -arrowSize / 2,
+                        width: arrowSize,
+                        height: arrowSize
+                    },
+                    rotation: directionMap[api.value(dims.R)],
+                    position: point,
+                    style: api.style({
+                        stroke: '#555',
+                        lineWidth: 1
+                    })
+                };
+            };
+            function renderWeather(param, api) {
+                var point = api.coord([
+                    api.value(dims.time) + 3600 * 24 * 1000 / 2,
+                    0
+                ]);
+                return {
+                    type: 'group',
+                    children: [{
+                        type: 'image',
+                        style: {
+                            image: api.value(dims.weatherIcon),
+                            x: -weatherIconSize / 2,
+                            y: -weatherIconSize / 2,
+                            width: weatherIconSize,
+                            height: weatherIconSize
+                        },
+                        position: [point[0], 110]
+                    }, {
+                        type: 'text',
+                        style: {
+                            text: api.value(dims.minTemp) + ' - ' + api.value(dims.maxTemp) + '°',
+                            textFont: api.font({fontSize: 14}),
+                            textAlign: 'center',
+                            textVerticalAlign: 'bottom'
+                        },
+                        position: [point[0], 80]
+                    }]
+                };
+            };
+            option = new Array();
+            option[0] = {
+                title: {
+                    text: '天气 风向 风速 海浪 预报',
+                    subtext: 'www.seabreeze.com.au',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        return [
+                            echarts.format.formatTime('yyyy-MM-dd', params[0].value[dims.time])
+                            + ' ' + echarts.format.formatTime('hh:mm', params[0].value[dims.time]),
+                            '风速：' + params[0].value[dims.windSpeed],
+                            '风向：' + params[0].value[dims.R],
+                            '浪高：' + params[0].value[dims.waveHeight]
+                        ].join('<br>');
+                    }
+                },
+                grid: {
+                    top: 160,
+                    bottom: 125
+                },
+                xAxis: {
+                    type: 'time',
+                    maxInterval: 3600 * 1000 * 24,
+                    splitLine: {
+                        lineStyle: {
+                            color: '#ddd'
+                        }
+                    }
+                },
+                yAxis: [{
+                    name: '风速（节）',
+                    nameLocation: 'middle',
+                    nameGap: 35,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#666'
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#ddd'
+                        }
+                    }
+                }, {
+                    name: '浪高（米）',
+                    nameLocation: 'middle',
+                    nameGap: 35,
+                    max: 6,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#015DD5'
+                        }
+                    },
+                    splitLine: {show: false}
+                }, {
+                    axisLine: {show: false},
+                    axisTick: {show: false},
+                    axisLabel: {show: false},
+                    splitLine: {show: false}
+                }],
+                visualMap: {
+                    type: 'piecewise',
+                    // show: false,
+                    orient: 'horizontal',
+                    left: 'center',
+                    bottom: 10,
+                    pieces: [{
+                        gte: 17,
+                        color: '#18BF12',
+                        label: '大风（>=17节）'
+                    }, {
+                        gte: 11,
+                        lt: 17,
+                        color: '#f4e9a3',
+                        label: '中风（11  ~ 17 节）'
+                    }, {
+                        lt: 11,
+                        color: '#D33C3E',
+                        label: '微风（小于 11 节）'
+                    }],
+                    seriesIndex: 1,
+                    dimension: 1
+                },
+                dataZoom: [{
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    minSpan: 5
+                }, {
+                    type: 'slider',
+                    xAxisIndex: 0,
+                    minSpan: 5,
+                    height: 20,
+                    bottom: 50,
+                    handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                    handleSize: '120%'
+                }],
+                series: [{
+                    type: 'line',
+                    yAxisIndex: 1,
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    symbolSize: 10,
+                    areaStyle: {
+                        normal: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(88,160,253,1)'
+                                }, {
+                                    offset: 0.5, color: 'rgba(88,160,253,0.7)'
+                                }, {
+                                    offset: 1, color: 'rgba(88,160,253,0)'
+                                }]
+                            }
+                        }
+                    },
+                    lineStyle: {
+                        normal: {
+                            color: 'rgba(88,160,253,1)'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(88,160,253,1)'
+                        }
+                    },
+                    encode: {
+                        x: dims.time,
+                        y: dims.waveHeight
+                    },
+                    data: data1,
+                    z: 2
+                }, {
+                    type: 'custom',
+                    renderItem: renderArrow,
+                    encode: {
+                        x: dims.time,
+                        y: dims.windSpeed
+                    },
+                    data: data1,
+                    z: 10
+                }, {
+                    type: 'line',
+                    symbol: 'none',
+                    encode: {
+                        x: dims.time,
+                        y: dims.windSpeed
+                    },
+                    lineStyle: {
+                        normal: {
+                            color: '#aaa',
+                            type: 'dotted'
+                        }
+                    },
+                    data: data1,
+                    z: 1
+                }, {
+                    type: 'custom',
+                    renderItem: renderWeather,
+                    data: weatherData,
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function (param) {
+                            return param.value[dims.time] + ': '
+                                + param.value[dims.minTemp] + ' - ' + param.value[dims.maxTemp] + '°';
+                        }
+                    },
+                    yAxisIndex: 2,
+                    z: 11
+                }]
+            };
+            option[1] = {
+                title : {
+                    text: '南丁格尔玫瑰图',
+                    subtext: '纯属虚构',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    x : 'center',
+                    y : 'bottom',
+                    data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: false},
+                        dataView : {show: false, readOnly: true},
+                        magicType : {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'半径模式',
+                        type:'pie',
+                        radius : [20, 110],
+                        center : ['25%', '50%'],
+                        roseType : 'radius',
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        lableLine: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:[
+                            {value:10, name:'rose1'},
+                            {value:5, name:'rose2'},
+                            {value:15, name:'rose3'},
+                            {value:25, name:'rose4'},
+                            {value:20, name:'rose5'},
+                            {value:35, name:'rose6'},
+                            {value:30, name:'rose7'},
+                            {value:40, name:'rose8'}
+                        ]
+                    },
+                    {
+                        name:'面积模式',
+                        type:'pie',
+                        radius : [30, 110],
+                        center : ['75%', '50%'],
+                        roseType : 'area',
+                        data:[
+                            {value:10, name:'rose1'},
+                            {value:5, name:'rose2'},
+                            {value:15, name:'rose3'},
+                            {value:25, name:'rose4'},
+                            {value:20, name:'rose5'},
+                            {value:35, name:'rose6'},
+                            {value:30, name:'rose7'},
+                            {value:40, name:'rose8'}
+                        ]
+                    }
+                ]
+            };
+            option[2] = {
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                },
+                toolbox: {
+                    show : true,
+                    orient : 'vertical',
+                    y : 'center',
+                    feature : {
+                        mark : {show: false},
+                        magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['周一','周二','周三','周四','周五','周六','周日']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+                        splitArea : {show : true}
+                    }
+                ],
+                grid: {
+                    x2:40
+                },
+                series : [
+                    {
+                        name:'直接访问',
+                        type:'bar',
+                        stack: '总量',
+                        data:[320, 332, 301, 334, 390, 330, 320]
+                    },
+                    {
+                        name:'邮件营销',
+                        type:'bar',
+                        stack: '总量',
+                        data:[120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name:'联盟广告',
+                        type:'bar',
+                        stack: '总量',
+                        data:[220, 182, 191, 234, 290, 330, 310]
+                    },
+                    {
+                        name:'视频广告',
+                        type:'bar',
+                        stack: '总量',
+                        data:[150, 232, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name:'搜索引擎',
+                        type:'bar',
+                        stack: '总量',
+                        data:[820, 932, 901, 934, 1290, 1330, 1320]
+                    }
+                ]
+            };
+            option[3] = {
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {
+                        type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                legend: {
+                    data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['周一','周二','周三','周四','周五','周六','周日']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'直接访问',
+                        type:'bar',
+                        data:[320, 332, 301, 334, 390, 330, 320]
+                    },
+                    {
+                        name:'邮件营销',
+                        type:'bar',
+                        stack: '广告',
+                        data:[120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name:'联盟广告',
+                        type:'bar',
+                        stack: '广告',
+                        data:[220, 182, 191, 234, 290, 330, 310]
+                    },
+                    {
+                        name:'视频广告',
+                        type:'bar',
+                        stack: '广告',
+                        data:[150, 232, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name:'搜索引擎',
+                        type:'bar',
+                        data:[862, 1018, 964, 1026, 1679, 1600, 1570],
+                        markLine : {
+                            lineStyle: {
+                                normal: {
+                                    type: 'dashed'
+                                }
+                            },
+                            data : [
+                                [{type : 'min'}, {type : 'max'}]
+                            ]
+                        }
+                    },
+                    {
+                        name:'百度',
+                        type:'bar',
+                        barWidth : 5,
+                        stack: '搜索引擎',
+                        data:[620, 732, 701, 734, 1090, 1130, 1120]
+                    },
+                    {
+                        name:'谷歌',
+                        type:'bar',
+                        stack: '搜索引擎',
+                        data:[120, 132, 101, 134, 290, 230, 220]
+                    },
+                    {
+                        name:'必应',
+                        type:'bar',
+                        stack: '搜索引擎',
+                        data:[60, 72, 71, 74, 190, 130, 110]
+                    },
+                    {
+                        name:'其他',
+                        type:'bar',
+                        stack: '搜索引擎',
+                        data:[62, 82, 91, 84, 109, 110, 120]
+                    }
+                ]
+            };
+            option[4] = {
+                title : {
+                    text: '人物关系：乔布斯',
+                    subtext: '数据来自人立方',
+                    x:'right',
+                    y:'bottom'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: '{a} : {b}'
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        restore : {show: true},
+                        magicType: {show: false},
+                        saveAsImage : {show: true}
+                    }
+                },
+                legend: {
+                    x: 'left',
+                    data:['家人','朋友']
+                },
+                series : [
+                    {
+                        type: 'graph',
+                        layout: 'force',
+                        name : "人物关系",
+                        label: {
+                            normal: {
+                                position: 'right'
+                            }
+                        },
+                        force: {
+                            repulsion: 100,edgeLength: 115,gravity:0.1,scaling: 1.1
+                        },
+                        categories : [
+                            {
+                                name: '人物'
+                            },
+                            {
+                                name: '家人'
+                            },
+                            {
+                                name:'朋友'
+                            }
+                        ],
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    textStyle: {
+                                        color: '#333'
+                                    }
+                                },
+                                nodeStyle : {
+                                    symbolSize :15,
+                                    brushType : 'both',
+                                    borderColor : 'rgba(255,215,0,0.4)',
+                                    borderWidth : 1
+                                },
+                                linkStyle: {
+                                    type: 'curve'
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    textStyle: null
+                                },
+                                nodeStyle : {
+                                },
+                                lineStyle: {
+                                    color: 'source',
+                                    width: 2,
+                                    curveness: 0.3
+                                }
+                            }
+                        },
+                        roam: 'move',
+                        nodes:[
+                            {category:0, name: '乔布斯',symbolSize:17,value:10, label: '乔布斯\n（主要）',draggable:true},
+                            {category:1, name: '丽萨-乔布斯',symbolSize:14,value : 7,draggable:true},
+                            {category:1, name: '保罗-乔布斯',symbolSize:13,value : 6,draggable:true},
+                            {category:1, name: '克拉拉-乔布斯',symbolSize:12,value : 5,draggable:true},
+                            {category:1, name: '劳伦-鲍威尔',symbolSize:9,value : 2,draggable:true},
+                            {category:2, name: '史蒂夫-沃兹尼艾克',symbolSize:10,value : 3,draggable:true},
+                            {category:2, name: '奥巴马',symbolSize:15,value : 8,draggable:true},
+                            {category:2, name: '比尔-盖茨',symbolSize:16,value : 9,draggable:true},
+                            {category:2, name: '乔纳森-艾夫',symbolSize:11,value : 4,draggable:true},
+                            {category:2, name: '蒂姆-库克',symbolSize:11,value : 4,draggable:true},
+                            {category:2, name: '龙-韦恩',symbolSize:9,value : 2,draggable:true},
+                        ],
+                        links : [
+                            {source : '丽萨-乔布斯', target : '乔布斯', weight : 1, name: '女儿'},
+                            {source : '保罗-乔布斯', target : '乔布斯', weight : 2, name: '父亲'},
+                            {source : '克拉拉-乔布斯', target : '乔布斯', weight : 1, name: '母亲'},
+                            {source : '劳伦-鲍威尔', target : '乔布斯', weight : 2},
+                            {source : '史蒂夫-沃兹尼艾克', target : '乔布斯', weight : 3, name: '合伙人'},
+                            {source : '奥巴马', target : '乔布斯', weight : 1},
+                            {source : '比尔-盖茨', target : '乔布斯', weight : 6, name: '竞争对手'},
+                            {source : '乔纳森-艾夫', target : '乔布斯', weight : 1, name: '爱将'},
+                            {source : '蒂姆-库克', target : '乔布斯', weight : 1},
+                            {source : '龙-韦恩', target : '乔布斯', weight : 1},
+                            {source : '克拉拉-乔布斯', target : '保罗-乔布斯', weight : 1},
+                            {source : '奥巴马', target : '保罗-乔布斯', weight : 1},
+                            {source : '奥巴马', target : '克拉拉-乔布斯', weight : 1},
+                            {source : '奥巴马', target : '劳伦-鲍威尔', weight : 1},
+                            {source : '奥巴马', target : '史蒂夫-沃兹尼艾克', weight : 1},
+                            {source : '比尔-盖茨', target : '奥巴马', weight : 6},
+                            {source : '比尔-盖茨', target : '克拉拉-乔布斯', weight : 1},
+                            {source : '蒂姆-库克', target : '奥巴马', weight : 1}
+                        ]
+                    }
+                ]
+            };
+            option[5] = {
+                title: {
+                    text: '多雷达图'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    x: 'center',
+                    data:['某软件','某主食手机','某水果手机','降水量','蒸发量']
+                },
+                radar: [
+                    {
+                        indicator: [
+                            {text: '品牌', max: 100},
+                            {text: '内容', max: 100},
+                            {text: '可用性', max: 100},
+                            {text: '功能', max: 100}
+                        ],
+                        center: ['25%','40%'],
+                        radius: 80
+                    },
+                    {
+                        indicator: [
+                            {text: '外观', max: 100},
+                            {text: '拍照', max: 100},
+                            {text: '系统', max: 100},
+                            {text: '性能', max: 100},
+                            {text: '屏幕', max: 100}
+                        ],
+                        radius: 80,
+                        center: ['50%','60%'],
+                    },
+                    {
+                        indicator: (function (){
+                            var res = [];
+                            for (var i = 1; i <= 12; i++) {
+                                res.push({text:i+'月',max:100});
+                            }
+                            return res;
+                        })(),
+                        center: ['75%','40%'],
+                        radius: 80
+                    }
+                ],
+                series: [
+                    {
+                        type: 'radar',
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                        data: [
+                            {
+                                value: [60,73,85,40],
+                                name: '某软件'
+                            }
+                        ]
+                    },
+                    {
+                        type: 'radar',
+                        radarIndex: 1,
+                        data: [
+                            {
+                                value: [85, 90, 90, 95, 95],
+                                name: '某主食手机'
+                            },
+                            {
+                                value: [95, 80, 95, 90, 93],
+                                name: '某水果手机'
+                            }
+                        ]
+                    },
+                    {
+                        type: 'radar',
+                        radarIndex: 2,
+                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                        data: [
+                            {
+                                name: '降水量',
+                                value: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3],
+                            },
+                            {
+                                name:'蒸发量',
+                                value:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 35.6, 62.2, 32.6, 20.0, 6.4, 3.3]
+                            }
+                        ]
+                    }
+                ]
+            };
+            option[6] = {
+                title: {
+                    text: '天气情况统计',
+                    subtext: '虚构数据',
+                    left: 'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    // orient: 'vertical',
+                    // top: 'middle',
+                    bottom: 10,
+                    left: 'center',
+                    data: ['西凉', '益州','兖州','荆州','幽州']
+                },
+                series : [
+                    {
+                        type: 'pie',
+                        radius : '65%',
+                        center: ['50%', '50%'],
+                        selectedMode: 'single',
+                        data:[
+                            {
+                                value:1548,
+                                name: '幽州',
+                                label: {
+                                    normal: {
+                                        formatter: [
+                                            '{title|{b}}{abg|}',
+                                            '  {weatherHead|天气}{valueHead|天数}{rateHead|占比}',
+                                            '{hr|}',
+                                            '  {Sunny|}{value|202}{rate|55.3%}',
+                                            '  {Cloudy|}{value|142}{rate|38.9%}',
+                                            '  {Showers|}{value|21}{rate|5.8%}'
+                                        ].join('\n'),
+                                        backgroundColor: '#eee',
+                                        borderColor: '#777',
+                                        borderWidth: 1,
+                                        borderRadius: 4,
+                                        rich: {
+                                            title: {
+                                                color: '#eee',
+                                                align: 'center'
+                                            },
+                                            abg: {
+                                                backgroundColor: '#333',
+                                                width: '100%',
+                                                align: 'right',
+                                                height: 25,
+                                                borderRadius: [4, 4, 0, 0]
+                                            },
+                                            Sunny: {
+                                                height: 30,
+                                                align: 'left',
+                                                backgroundColor: {
+                                                    image: weatherIcons.Sunny
+                                                }
+                                            },
+                                            Cloudy: {
+                                                height: 30,
+                                                align: 'left',
+                                                backgroundColor: {
+                                                    image: weatherIcons.Cloudy
+                                                }
+                                            },
+                                            Showers: {
+                                                height: 30,
+                                                align: 'left',
+                                                backgroundColor: {
+                                                    image: weatherIcons.Showers
+                                                }
+                                            },
+                                            weatherHead: {
+                                                color: '#333',
+                                                height: 24,
+                                                align: 'left'
+                                            },
+                                            hr: {
+                                                borderColor: '#777',
+                                                width: '100%',
+                                                borderWidth: 0.5,
+                                                height: 0
+                                            },
+                                            value: {
+                                                width: 20,
+                                                padding: [0, 20, 0, 30],
+                                                align: 'left'
+                                            },
+                                            valueHead: {
+                                                color: '#333',
+                                                width: 20,
+                                                padding: [0, 20, 0, 30],
+                                                align: 'center'
+                                            },
+                                            rate: {
+                                                width: 40,
+                                                align: 'right',
+                                                padding: [0, 10, 0, 0]
+                                            },
+                                            rateHead: {
+                                                color: '#333',
+                                                width: 40,
+                                                align: 'center',
+                                                padding: [0, 10, 0, 0]
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {value:535, name: '荆州'},
+                            {value:510, name: '兖州'},
+                            {value:634, name: '益州'},
+                            {value:735, name: '西凉'}
+                        ],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            option[7] = {
+                title: {
+                    text: 'Sankey Diagram'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    triggerOn: 'mousemove'
+                },
+                series: [
+                    {
+                        type: 'sankey',
+                        data: [{"name": "Agricultural 'waste'"},{"name": "Bio-conversion"},{"name": "Liquid"},{"name": "Losses"},{"name": "Solid"},{"name": "Gas"},{"name": "Biofuel imports"},{"name": "Biomass imports"},{"name": "Coal imports"},{"name": "Coal"},{"name": "Coal reserves"},{"name": "District heating"},{"name": "Industry"},{"name": "Heating and cooling - commercial"},{"name": "Heating and cooling - homes"},{"name": "Electricity grid"},{"name": "Over generation / exports"},{"name": "H2 conversion"},{"name": "Road transport"},{"name": "Agriculture"},{"name": "Rail transport"},{"name": "Lighting & appliances - commercial"},{"name": "Lighting & appliances - homes"},{"name": "Gas imports"},{"name": "Ngas"},{"name": "Gas reserves"},{"name": "Thermal generation"},{"name": "Geothermal"},{"name": "H2"},{"name": "Hydro"},{"name": "International shipping"},{"name": "Domestic aviation"},{"name": "International aviation"},{"name": "National navigation"},{"name": "Marine algae"},{"name": "Nuclear"},{"name": "Oil imports"},{"name": "Oil"},{"name": "Oil reserves"},{"name": "Other waste"},{"name": "Pumped heat"},{"name": "Solar PV"},{"name": "Solar Thermal"},{"name": "Solar"},{"name": "Tidal"},{"name": "UK land based bioenergy"},{"name": "Wave"},{"name": "Wind"}],
+                        links: [{"source": "Agricultural 'waste'","target": "Bio-conversion","value": 124.729},{"source": "Bio-conversion","target": "Liquid","value": 0.597},{"source": "Bio-conversion","target": "Losses","value": 26.862},{"source": "Bio-conversion","target": "Solid","value": 280.322},{"source": "Bio-conversion","target": "Gas","value": 81.144},{"source": "Biofuel imports","target": "Liquid","value": 35},{"source": "Biomass imports","target": "Solid","value": 35},{"source": "Coal imports","target": "Coal","value": 11.606},{"source": "Coal reserves","target": "Coal","value": 63.965},{"source": "Coal","target": "Solid","value": 75.571},{"source": "District heating","target": "Industry","value": 10.639},{"source": "District heating","target": "Heating and cooling - commercial","value": 22.505},{"source": "District heating","target": "Heating and cooling - homes","value": 46.184},{"source": "Electricity grid","target": "Over generation / exports","value": 104.453},{"source": "Electricity grid","target": "Heating and cooling - homes","value": 113.726},{"source": "Electricity grid","target": "H2 conversion","value": 27.14},{"source": "Electricity grid","target": "Industry","value": 342.165},{"source": "Electricity grid","target": "Road transport","value": 37.797},{"source": "Electricity grid","target": "Agriculture","value": 4.412},{"source": "Electricity grid","target": "Heating and cooling - commercial","value": 40.858},{"source": "Electricity grid","target": "Losses","value": 56.691},{"source": "Electricity grid","target": "Rail transport","value": 7.863},{"source": "Electricity grid","target": "Lighting & appliances - commercial","value": 90.008},{"source": "Electricity grid","target": "Lighting & appliances - homes","value": 93.494},{"source": "Gas imports","target": "Ngas","value": 40.719},{"source": "Gas reserves","target": "Ngas","value": 82.233},{"source": "Gas","target": "Heating and cooling - commercial","value": 0.129},{"source": "Gas","target": "Losses","value": 1.401},{"source": "Gas","target": "Thermal generation","value": 151.891},{"source": "Gas","target": "Agriculture","value": 2.096},{"source": "Gas","target": "Industry","value": 48.58},{"source": "Geothermal","target": "Electricity grid","value": 7.013},{"source": "H2 conversion","target": "H2","value": 20.897},{"source": "H2 conversion","target": "Losses","value": 6.242},{"source": "H2","target": "Road transport","value": 20.897},{"source": "Hydro","target": "Electricity grid","value": 6.995},{"source": "Liquid","target": "Industry","value": 121.066},{"source": "Liquid","target": "International shipping","value": 128.69},{"source": "Liquid","target": "Road transport","value": 135.835},{"source": "Liquid","target": "Domestic aviation","value": 14.458},{"source": "Liquid","target": "International aviation","value": 206.267},{"source": "Liquid","target": "Agriculture","value": 3.64},{"source": "Liquid","target": "National navigation","value": 33.218},{"source": "Liquid","target": "Rail transport","value": 4.413},{"source": "Marine algae","target": "Bio-conversion","value": 4.375},{"source": "Ngas","target": "Gas","value": 122.952},{"source": "Nuclear","target": "Thermal generation","value": 839.978},{"source": "Oil imports","target": "Oil","value": 504.287},{"source": "Oil reserves","target": "Oil","value": 107.703},{"source": "Oil","target": "Liquid","value": 611.99},{"source": "Other waste","target": "Solid","value": 56.587},{"source": "Other waste","target": "Bio-conversion","value": 77.81},{"source": "Pumped heat","target": "Heating and cooling - homes","value": 193.026},{"source": "Pumped heat","target": "Heating and cooling - commercial","value": 70.672},{"source": "Solar PV","target": "Electricity grid","value": 59.901},{"source": "Solar Thermal","target": "Heating and cooling - homes","value": 19.263},{"source": "Solar","target": "Solar Thermal","value": 19.263},{"source": "Solar","target": "Solar PV","value": 59.901},{"source": "Solid","target": "Agriculture","value": 0.882},{"source": "Solid","target": "Thermal generation","value": 400.12},{"source": "Solid","target": "Industry","value": 46.477},{"source": "Thermal generation","target": "Electricity grid","value": 525.531},{"source": "Thermal generation","target": "Losses","value": 787.129},{"source": "Thermal generation","target": "District heating","value": 79.329},{"source": "Tidal","target": "Electricity grid","value": 9.452},{"source": "UK land based bioenergy","target": "Bio-conversion","value": 182.01},{"source": "Wave","target": "Electricity grid","value": 19.013},{"source": "Wind","target": "Electricity grid","value": 289.366}],
+                        focusNodeAdjacency: 'allEdges',
+                        itemStyle: {
+                            normal: {
+                                borderWidth: 1,
+                                borderColor: '#aaa'
+                            }
+                        },
+                        lineStyle: {
+                            normal: {
+                                color: 'source',
+                                curveness: 0.5
+                            }
+                        }
+                    }
+                ]
+            };
+            option[8] = {
+                color: ['#5793f3', '#d14a61', '#675bba'],
+
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                grid: {
+                    right: '20%'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {show: true, readOnly: false},
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                legend: {
+                    data:['蒸发量','降水量','平均温度']
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '蒸发量',
+                        min: 0,
+                        max: 250,
+                        position: 'right',
+                        axisLine: {
+                            lineStyle: {
+                                color:"#5793f3"
+                            }
+                        },
+                        axisLabel: {
+                            formatter: '{value} ml'
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: '降水量',
+                        min: 0,
+                        max: 250,
+                        position: 'right',
+                        offset: 80,
+                        axisLine: {
+                            lineStyle: {
+                                color:"#d14a61"
+                            }
+                        },
+                        axisLabel: {
+                            formatter: '{value} ml'
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: '温度',
+                        min: 0,
+                        max: 25,
+                        position: 'left',
+                        axisLine: {
+                            lineStyle: {
+                                color:"#675bba"
+                            }
+                        },
+                        axisLabel: {
+                            formatter: '{value} °C'
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name:'蒸发量',
+                        type:'bar',
+                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                    },
+                    {
+                        name:'降水量',
+                        type:'bar',
+                        yAxisIndex: 1,
+                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                    },
+                    {
+                        name:'平均温度',
+                        type:'line',
+                        yAxisIndex: 2,
+                        data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                    }
+                ]
+            };
+            option[9] = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
+                },
+                series: [
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        selectedMode: 'single',
+                        radius: [0, '30%'],
+
+                        label: {
+                            normal: {
+                                position: 'inner'
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {value:335, name:'直达', selected:true},
+                            {value:679, name:'营销广告'},
+                            {value:1548, name:'搜索引擎'}
+                        ]
+                    },
+                    {
+                        name:'访问来源',
+                        type:'pie',
+                        radius: ['40%', '55%'],
+                        label: {
+                            normal: {
+                                formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                                backgroundColor: '#eee',
+                                borderColor: '#aaa',
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                // shadowBlur:3,
+                                // shadowOffsetX: 2,
+                                // shadowOffsetY: 2,
+                                // shadowColor: '#999',
+                                // padding: [0, 7],
+                                rich: {
+                                    a: {
+                                        color: '#999',
+                                        lineHeight: 22,
+                                        align: 'center'
+                                    },
+                                    // abg: {
+                                    //     backgroundColor: '#333',
+                                    //     width: '100%',
+                                    //     align: 'right',
+                                    //     height: 22,
+                                    //     borderRadius: [4, 4, 0, 0]
+                                    // },
+                                    hr: {
+                                        borderColor: '#aaa',
+                                        width: '100%',
+                                        borderWidth: 0.5,
+                                        height: 0
+                                    },
+                                    b: {
+                                        fontSize: 16,
+                                        lineHeight: 33
+                                    },
+                                    per: {
+                                        color: '#eee',
+                                        backgroundColor: '#334455',
+                                        padding: [2, 4],
+                                        borderRadius: 2
+                                    }
+                                }
+                            }
+                        },
+                        data:[
+                            {value:335, name:'直达'},
+                            {value:310, name:'邮件营销'},
+                            {value:234, name:'联盟广告'},
+                            {value:135, name:'视频广告'},
+                            {value:1048, name:'百度'},
+                            {value:251, name:'谷歌'},
+                            {value:147, name:'必应'},
+                            {value:102, name:'其他'}
+                        ]
+                    }
+                ]
+            };
+            if (option[0] && typeof option[0] === "object") {
+                myChart.setOption(option[0], true);
+            }
+            window.onresize = function () {
+                document.getElementById('container').style.width='96%';
+                myChart.resize();
+            }
+        </script>
+        <div class="page" ondragstart="return false"></div><script>
+            new Pagination({
+                container: '.page',
+                current:1,
+                maxShow:dom,
+                pageCount:option.length,
+                onPageChange:function(p){
+                    if (option[p-1] && typeof option[p-1] === "object")
+                    myChart.setOption(option[p-1], true);
+                }
+            });
+        </script>
+        <div style="padding-left: 20px;display: flex;flex-direction:column">
+            <ul>
+                <li><a href="#"><script>document.write("123456:");document.write(hex_md5("123456"))</script></a>
+                    <a href="javascript:history.go(-1);">后退</a><% var articles = [  { title : 'title name', content : 'this is a test content!'}];%>
+                    <% articles.forEach((e, i)=>{ %>
+                            <div class="panel">
+                                <div><%= i+e.title %></div>
+                                <div class="panel-body">
+                                    <%= e.content %>
+                                </div>
+                            </div>
+                    <% }) %></li>
+                <li>
+                    
+                </li>
+            </ul> 
+            <div class="wrapper">
+                <ul>
+                    <li>
+                        <div class="title">
+                            <h1>温泉酒店</h1>
+                        </div>
+                        <div class="picBox picBox1"></div>
+                        <div class="decration">有谁不爱泡温泉？浸入雾气蒸腾的泉水之中，把身体泡成一片茶叶，舒展轻盈。有比这更美妙的感觉吗？</div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <h1>时尚酒店</h1>
+                        </div>
+                        <div class="picBox picBox2"></div>
+                        <div class="decration">浪漫，是香闺围笼，是灯火迷离，泪眼婆裟的唯美，是杨柳岸、晓风残月中的无语凝噎……</div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <h1>设计师酒店</h1>
+                        </div>
+                        <div class="picBox picBox3"></div>
+                        <div class="decration">前卫的酒店设计理念，独具魅力的风格，优美的自然风光才能有这样顶级的酒店</div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <h1>青年旅店</h1>
+                        </div>
+                        <div class="picBox picBox4"></div>
+                        <div class="decration">我为你煮一杯温茶，斟一杯美酒。让我们席地而坐，听你的梦想。用你的只言片语装点我们的梦想博物馆</div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <h1>民宿客栈</h1>
+                        </div>
+                        <div class="picBox picBox5"></div>
+                        <div class="decration">在这里，你可以静静发呆，而不被人打扰；在这里，你能看见最美好的星星，能让你找到最深的感动</div>
+                    </li>
+                    <li>
+                        <div class="title">
+                            <h1>海岛酒店</h1>
+                        </div>
+                        <div class="picBox picBox6"></div>
+                        <div class="decration">不想过冬，厌倦沉重，就飞去热带的岛屿游泳，卸下包袱，放下压力，在这碧海蓝天之中</div>
+                    </li>
+                    <li class="max">
+                        <div class="title">
+                            <h1>海外酒店</h1>
+                        </div>
+                        <div class="picBox picBox7"></div>
+                        <div class="decration">因地形地质的区别，世界各地的温泉也千差万别，选择一处适合自己的温泉，你会忘记世界</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <script>var oUl = $('.wrapper ul'),
+            oLi = $('.wrapper ul li'),
+            len = oLi.length,
+            showItem = len -1,
+            ot = Math.floor(window.parent.innerWidth/2/(len - 1));
+        var timer;
+        function bindEvent(){
+            oLi.on('click', function(){
+                if(!(showItem == $(this).index() && showItem + 1 == len)){
+                    change($(this));
+                }
+                showItem = $(this).index();
+            });
+            oUl.on('mouseover',function(){
+                if(timer){
+                    clearInterval(timer);timer=null;
+                }
+            })
+            oUl.on('mouseleave',function(){
+                if(timer==null){
+                    timer=setInterval(function(){
+                        showItem++;if(showItem==len)showItem=0;
+                        change($(oLi[showItem]));
+                    },3000)
+                }
+            });
+        }
+        
+        function init(){
+            change($(oLi[showItem]));
+            timer=setInterval(function(){
+                showItem++;if(showItem==len)showItem=0;
+                change($(oLi[showItem]));
+            },3000)
+        }
+        
+        function change(event){
+            event.animate({
+                'width': '400px'
+            }, 300, 'linear').siblings().animate({
+                'width' : (ot + 'px')
+            },300,'linear');   //liner？
+            event.find('.title').css({
+                'display': 'none'
+            });
+            event.siblings().find('.title').css({
+                'display': 'block'
+            });
+            event.find('.decration').css({
+                'bottom':'0px',
+                'padding-bottom': '2px'
+            })
+            event.siblings().find('.decration').css({
+                'bottom':'-50px'
+            })
+        }
+        bindEvent();
+        init();
+        </script>
+    <!-- 让表格支持响应式<div class="table-responsive">
+      <table class="table">location
+        ...
+      </table>
+    </div> -->
+</body>

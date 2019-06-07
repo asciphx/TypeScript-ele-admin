@@ -1,0 +1,211 @@
+<style type="text/css">
+.showBanner {
+background:rgba(212, 222, 232, 0.6);
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#600c1620, 20, endColorstr=#600c1620, 20);
+width:100%;min-height:250px;
+height:37%;position:fixed;top:0;
+}
+.showBanner .banner .bannerInfo {
+list-style-type:none;width:114px;z-index:3;margin:0 auto 0 auto;top:88%;display:inline-block;position:relative;height:20px;
+}
+.bannerBtn button.next {
+  opacity:0.5;height:47px;background-position-y:-46px;right:20%;
+}
+.showBanner .banner {
+  float:left;
+  width:100%;
+  height:99%;
+  position:relative;
+  display: flex;min-height:248px;
+}
+.showBanner .banner .bannerPic {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+.showBanner .banner .bannerPic li {
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:0;
+  opacity:0;
+}
+.showBanner .banner .bannerPic li.active {
+  z-index:1;
+  opacity:1;
+}
+.bannerLoc {
+  height:100%;
+}
+.bannerLoc .bannerPic li img {
+  float:left;
+  width:100%;
+  height:100%;
+}
+.bannerInfo li {
+  float:left;
+  width:10px;
+  height:10px;
+  margin:5px;
+  border-radius:10px;
+  background:rgba(227, 234, 247, 0.9);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#400d2940, 40, endColorstr=#400d2940, 40);
+}
+.bannerInfo li:hover {
+  background:#637AA1;
+}
+.bannerInfo li:hover a {
+  color:#fff;
+}
+.bannerInfo li.active {
+  background:#9AD9FF;
+}
+.bannerInfo li.active a {
+  color:#fff;
+}
+.bannerInfo li a {
+  font-size:12px;
+  display:block;
+  width:100%;
+  height:10px;
+  text-align:center;
+}
+.showBanner .banner .bannerBtn {
+  display:none;
+}
+.bannerBtn button {
+  display:block;
+  border:0;
+  height:49px;
+  width:49px;
+  position:absolute;
+  background:url('../../resource/h-ui/icon.png') 0 0 no-repeat;
+  z-index:2;
+  top:41%;
+  outline:none;
+}
+.bannerBtn button.prev {
+  opacity:0.5;
+  height:47px;
+  background-position-y:1px;
+  left:20%;
+}
+.bannerBtn button:hover {
+  opacity:1;
+  cursor:pointer;
+}</style>
+	<div class="showBanner">
+		<div class="banner">
+			<div  class="bannerLoc">
+				<ul  class="bannerPic">
+					<li  data="" title="">
+	                   <img src="../../resource/h-ui/1.jpg"/>
+	                </li>
+	                <li data="" title="">
+	                   <img src="../../resource/h-ui/2.jpg"/>
+	                </li>
+	                <li data="" title="" >
+	                   <img src="../../resource/h-ui/3.jpg"/>
+	                </li>
+	                <li data="" title="" >
+	                   <img src="../../resource/h-ui/4.jpg"/>
+	                </li>
+	                <li data="" title="" >
+	                   <img src="../../resource/h-ui/5.jpg"/>
+	                </li>
+		     	</ul>
+	     	</div>
+	       <ul class="bannerInfo">
+			</ul>
+			<div class="bannerBtn">
+				<button class="prev"></button>
+				<button class="next"></button>
+			</div>
+		</div>
+	</div>
+<script>
+var count=0,myArray=new Array(4);
+var timer=null;
+var length=$('.bannerPic li').length;
+var info='';
+var startX,startY,moveEndX,moveEndY,X,Y;
+$(".banner").on("touchstart", function(e) {
+e.preventDefault();
+clearInterval(timer);
+startX = e.originalEvent.changedTouches[0].pageX,
+startY = e.originalEvent.changedTouches[0].pageY;
+});
+$(".banner").on("touchmove", function(e) {
+e.preventDefault();
+moveEndX = e.originalEvent.changedTouches[0].pageX,
+moveEndY = e.originalEvent.changedTouches[0].pageY,
+X = moveEndX - startX,
+Y = moveEndY - startY;
+});
+$(".banner").on("touchend", function() {
+if ( X > 80 ) {$('.banner .prev').click();
+clearInterval(timer);
+timer=setInterval(function(){
+$('.banner .next').trigger('click');
+},3150);}
+else if ( X < -80 ) {
+$('.banner .next').click();
+clearInterval(timer);
+timer=setInterval(function(){
+$('.banner .next').trigger('click');
+},3150);}
+else if ( Y > 80) {}
+else if ( Y < -80 ) {}
+});
+for(var i=0;i<length;i++){
+	info+='<li title="'+$('.bannerPic li').eq(i).attr('title')+'"><a href="javascript:;">'+$('.bannerPic li').eq(i).attr('data')+'</a></li>';
+};
+$('.bannerInfo').append(info);
+$('.bannerPic li:first').addClass('active');
+$('.bannerInfo li:first').addClass('active');
+$('.banner').hover(function(){
+	$('.banner .bannerBtn').show();
+	clearInterval(timer);
+},function(){
+	$('.banner .bannerBtn').hide();
+	clearInterval(timer);
+	timer=setInterval(function(){
+		$('.banner .next').trigger('click');
+	},3150);
+});
+function roll(index){
+	$('.bannerPic li').stop(false,true);
+	$('.bannerPic li.active').animate({'opacity':0},1000,function(){
+		$('div.bannerBtn button').each(function(){
+			if(this.disabled)this.disabled=false;
+		});$('.bannerInfo li').each(function(){this.disabled=false})
+    }).removeClass('active').css({'z-index':0});
+	$('.bannerPic li').eq(count).animate({'opacity':1},1000).addClass('active').css({'z-index':2});
+	$('.bannerInfo li').removeClass('active');
+	$('.bannerInfo li').eq(count).addClass('active');
+}
+$('.bannerInfo li').click(function(){
+	if($('.bannerInfo li:eq('+$('.bannerInfo li').index(this)+')')[0].className!="active"){
+	$('.bannerInfo li').removeClass('active');
+	$(this).addClass('active');
+	count=$(this).index();
+	roll(count);}
+});
+$('.banner .prev').click(function(){
+	this.disabled=true;
+	count==0?count=length-1:count--;
+	roll(count);
+});
+$('.banner .next').click(function(){
+	this.disabled=true;
+	count==length-1?count=0:count++;
+	roll(count);
+});
+timer=setInterval(function(){
+	$('.banner .next').trigger('click');
+},3000);
+</script>

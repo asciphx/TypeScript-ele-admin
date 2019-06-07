@@ -1,0 +1,210 @@
+/* -----------H-ui前端框架-----------------------
+H-ui.css v1.5.7
+date: 2014-12-18
+Created & Modified by guojunhui.
+基于Bootstrap框架的改进扩展，比Bootstrap更懂中国。
+完全免费，简单灵活，兼容性，满足大多数中国网站。
+不断完善中，诚邀更多前端开发者加入，开发更多优秀的代码，服务于更多的中国网站。
+H-ui CSS file for H-ui
+Copyright H-ui&Twitter Inc.
+by @twitter by @mdo and @fat，由Tvlike.me/TV来客开发者翻译
+开源依照 Apache License v2.0 发布。 文档依照 CC BY 3.0 发布。
+Icons取自 Glyphicons Free，授权依照 CC BY 3.0。
+http://www.H-ui.net		http://www.apache.org/licenses/LICENSE-2.0		http://www.cnbootstrap.com
+----------------------------------------------*/
+/*------------------------------------
+结构目录：
+  1. css reset重定义浏览器默认样式
+  2. 框架
+    2.1 栅格系统
+    2.2 流动栅格系统
+    2.3 布局
+    2.4 响应式设计
+  3. 基础CSS
+    3.1 排版
+      3.1.1  标题
+      3.1.2  强调
+      3.1.3  对齐
+      3.1.4  定位
+      3.1.5  浮动
+	  3.1.6 文字单行溢出省略号
+	  3.1.7 线条
+      3.1.8  外边距
+      3.1.9  内填充
+      3.1.10 边框，css3圆角
+      3.1.11 css3阴影
+      3.1.12 行内分割竖线
+      3.1.13 文字尺寸
+      3.1.14 文字行距
+      3.1.15 文字颜色
+      3.1.16 文字颜色强调
+      3.1.17 缩略语
+      3.1.18 地址
+      3.1.19 引用
+      3.1.20 上标 下标
+      3.1.21 内容样式
+      3.1.22 列表
+      3.1.23 描述
+	  3.1.24 隐藏 显示
+    3.2 代码
+    3.3 表格
+    3.4 表单
+    3.5 按钮
+    3.6 图片
+    3.7 图标
+	3.8 效果
+  4. 组件
+    4.1 按钮组
+    4.2 导航
+      4.2.1 导航条
+      4.2.2 面包屑导航
+      4.2.3 翻页导航
+	  4.2.4 顶部导航
+	  4.2.5 向导
+	  4.2.6 竖向导向tab导航
+	  4.2.7 横向tab
+    4.3 下拉菜单
+    4.4 幻灯片
+    4.5 选项卡
+    4.6 便签与标号
+    4.7 缩略图
+    4.8 警告
+    4.9 进度条 loading
+    4.10 对话框 弹出层
+    4.11 客服
+    4.12 返回顶部
+    4.13 分享
+    4.14 媒体插入
+    4.15 案例
+    4.16 滚动
+    4.17 搜索
+    4.18 广告
+    4.19 标签
+	  4.19.1 标签输入效果
+	  4.19.2 标签混排效果
+	  4.19.3 tag云标签
+    4.20 折叠
+    4.21 遮罩条
+    4.22 评论列表
+  5. 页面
+	5.1 博客列表页
+	5.2 博客详情页
+	5.3 关于我们页
+	5.4 帮助列表页
+	5.5 帮助详情页
+	5.6 错误页
+----------------------------------
+CSS写作注意事项：
+  1. 页面编码规范
+    1.1. 统一使用 UTF-8 编码,用@charset "utf-8"指定页面编码。
+    1.2. 新宋体，宋体，微软雅黑，Arial首选，避免使用个性化字体。
+    1.3. 中文字体使用编码转换，请参阅下节“中文字体css编码转换”
+    1.4. 推荐使用216web安全色
+  2. 属性写在一行内，属性之间、属性名和值之间以及属性与“{}”之间应减少空格，去掉最后一个“;”，例如：.class{width:200px;height:100px}
+  3. 属性的书写顺序：
+    3.1. 按照元素模型由外及内，由整体到细节书写，大致分为五组：
+      位置：position,left,right,float
+      盒模型属性：display,margin,padding,width,height
+      边框与背景：border,background
+      段落与文本：line-height,text-indent,font,color,text-decoration,...
+      其他属性：overflow,cursor,visibility,...
+    3.2. 针对特殊浏览器的属性，应写在标准属性之前，例如：-webkit-box-shadow:;-moz-box-shadow:;box-shaow:;
+  4. 带有前缀的属性，单独一行，通过缩进，让每个属性的值垂直对齐，方便编辑维护。
+  5. 谨慎添加新的选择符规则，尤其不可滥用 id，尽可能继承和复用已有样式
+  6. 选择符、属性、值均用小写（格式的颜色值除外），缩写的选择符名称须说明缩写前的全称，例如 .cl -> Clearfix
+  7. 避免使用各种 CSS Hack，如需对 IE 进行特殊定义，请参阅下节“关于 CSS Hack 的说明”
+  8. 勿使用冗余低效的 CSS 写法，例如：ul li a span{... }
+  9. 慎用 !important
+  10. 建议使用具有语义化的classname或id，请参阅下节“css 命名规范及对应的缩写”
+  11.避免使用兼容性不好的使用滤镜 
+  12.开发过程中的未定事项，须用 [!] 标出，以便于后续讨论整理。
+  13.注释格式，统一使用双斜杠加*。
+  14.上下模块之间的间距统一使用下一个模块的margin-top来实现，好处是：如果没有下一个模块也不会多出一段空隙。
+  15.hover，selected，disabled，current等具有特定意义的请勿直接占用。
+  16.:link :visited :hover :active书写顺序 L-V-H-A，速记：LoVe（喜欢）HAte（讨厌）。
+  17.不要使用 @import
+----------------------------------
+中文字体css编码转换
+  微软雅黑   \5FAE\8F6F\96C5\9ED1  或 Microsoft YaHei
+  黑体       \9ED1\4F53
+  新宋体     \65b0\5b8b\4f53
+  宋体       \5b8b\4f53
+----------------------------------
+关于 CSS Hack 的说明：
+  1. _          IE6
+  2. *          IE6/7
+  3. !important IE7/Firefox
+  4. *+         IE7
+  5. \9         IE6/7/8
+  6. \0         IE8
+  7. 条件hack
+      <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]--> IE7以下版本
+      <!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]--> IE7
+      <!--[if IE 8]> <html class="no-js lt-ie9"><![endif]--> IE8
+      <!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--> IE8以上
+----------------------------------
+css 命名规范
+  1. 内容优先,表现为辅
+  2. css命名中英文对照
+  current 当前     hover 悬停      selected 挑选     disabled 禁用     focus 得到焦点     blur 失去焦点    checked 勾选     success 成功   error 出错
+  header(hd) 头部  content(cnt) 内容    title(tit) 标题    item 项目（条）   cell 单元    image/pic(img) 图片    text(txt) 文字    
+  top 顶部         header 头       scrubber 时序菜单
+  nav 导航        mainbav 主导航    subnav 子导航         topnav 顶部导航     breadcrumb 面包屑导航
+  flink 友情链接    footer 尾       copyright 版权
+  menu 菜单        submenu 子菜单
+  searchBar 搜索条 search 搜索条   searchTxt 搜索框      searchBtn 搜索按钮    search_key 搜索词
+  ucenter 用户中心 loginBar 登陆条 login 登录            loginBtn 登录按钮     regsiter 注册按钮   regsiterBtn 注册按钮
+  name 用户名      password 密码   nickname 昵称         mobilephone 手机      telephone 电话		defaultavatar 默认头像
+  hot 热点         news 新闻       banner/AD 广告        download 下载
+  content 内容     title 标题      summary 摘要          time 时间
+  share 分享       digg 顶         like 喜欢
+  list 列表        pList 图片列表  tList 文字列表        tpList 图文列表
+  table 表格       row 行         column 列            gutter 间隔           viewport 视口
+  tab 标签         tags 标签       scroll 滚动 
+  sidebar 侧边栏   column 栏目     section 区块          msg 提示信息          status 状态
+  vote 投票        tips 小技巧     guild 指南            note 注释
+  icon- 图标       btn- 按钮
+  goods 商品       goodsList 商品列表        goodsDetail 商品详情     goodsInfo 商品信息
+  tuan 团购        tuanList 团购列表         tuanDetail  团购详情     tuanInfo 团购信息 
+  transition 动画	shadow 阴影				fade 淡入淡出				flip 翻页效		slide 滑动	slideup 上滑动	slidedown 下滑动	turn 翻页
+  horizontal 水平	vertical 垂直			collapsible 折叠		corners 拐角			flow 流		reverse 反向		pop 弹窗
+  count 总数 计数		plus 加号 正				minus 减号 负		controlgroup 控制组		
+----------------------------------
+html命名规范：
+  default/index.html    首页
+  list.html             列表页
+  show.html             展示页
+  404.html              404错误页
+  print.html            打印页
+  footer.html           页脚
+  sitemap.html          网站地图
+  tag.html              tag列表
+  rank.html             排行榜首页
+  roll.html             滚动新闻  
+  solution.html         解决方案
+  joinus.html           加入我们
+  partner.html          合作伙伴
+  service.html          服务
+  newslist.html         新闻列表
+  aboutus.html          关于我们
+  contact.html          联系我们
+  brand.html            品牌
+  brandlist             品牌列表
+  news.html             新闻页
+  company.html          公司介绍
+  organization.html     组织结构
+  culture.html          企业文化
+  strategy.html         发展策略
+  honor.html            公司荣誉
+  aptitudes.html        企业资质
+  events.html           大事记
+  passport.html         通行证
+  business.html         商务合作
+  contract.html         服务条款
+  privacy.html          隐私声明
+  CSR.html              企业社会责任
+---------------------------------- */
+/*1 重定义浏览器默认样式
+	Name:			style_reset
+	Explain:		重定义浏览器默认样式
+*/

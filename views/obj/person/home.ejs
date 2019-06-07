@@ -1,0 +1,88 @@
+<%include ../../taglib.ejs %>
+<link href="../../resource/bootstrap.css" rel="stylesheet"><link rel="shortcut icon"href="#"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+<head><title></title>
+<style type="text/css"> #main {
+	width:80%;margin:0 0 0 19%;top:190px;position: fixed;height:90%;
+}#form1{min-height:255px;height:38%;}</style></head>
+<script type="text/javascript" src="..\..\js\ecSimple.js"></script>
+<script type="text/javascript" src="..\..\js\ecWordcloud.js"></script>
+<body class= "mobile" style="margin:0;padding:0">
+		<div id='main'  onselectstart="return false"></div>
+    <div id="app" style="height: 100vh;position: absolute;z-index:5"></div>
+    <script src="..\..\js\webamp.js"></script>
+	<%include ../banner.ejs %>
+	<!-- <form name="form1" method="post" action= "list.html" target= "query"> -->
+	<form name="form1">
+		<div id="form1"></div>
+		<div style="overflow-x: hidden;position:fixed;z-index:0;">
+			<h3 style="color: blue;">说明：兼容移动端，ie9+。</h3>
+			<h4 style="color: blue;">1、作者：吴启辰，qq：470878184</h4>
+			<h4 style="color: blue;">  e-mail：maxspore@foxmail.com，电话：13028832759</h4>
+			<h4 style="color: blue;">2、无刷新Curd，分页，上传头像，保存数据等。</h4>
+			<h4 style="color: blue;">  基于H-ui前端框架，TypeORM后端框架。</h4>
+			<h4 style="color: blue;">3、个人整合了许多模块，比如MarkDown，layer弹窗，</h4>
+			<h4 style="color: blue;">  winXp，但由于时间问题，有些细节仍待改进。</h4>
+			<h4 style="color: blue;">新系统加入了单点登录，登陆滑块验证等！注意素质，勿乱留言</h4>
+		</div>
+	</form>
+	<button id="webapp" style="position:absolute;top:0;font-size:9pt" title="音乐播放器">♬</button>
+	<script>var $flake = $("<div style='position:absolute;cursor:default;color:#fff;top:-50px;opacity:0.8'>❄</div>");
+	var asd=500000/window.innerWidth-30
+		setInterval(function(){
+			$flake.clone().appendTo("body").css({"left":Math.random()*window.innerWidth-60,"font-size":8+Math.random()* 30
+			}).animate({"top":window.innerHeight-70,"left":Math.random()*window.innerWidth-60,"opacity":0.4
+			}, window.innerHeight*7+Math.random()*9000, function () {$(this).remove();});
+		},asd);
+		if(window.innerWidth>800){
+		var chart = echarts.init(document.getElementById('main'));
+		// window.onresize = function () {chart.resize();}
+		var keywords = {"visualMap": 22199,"continuous": 10288,"contoller": 620,"series": 84470,"target": 1433,"zlevel": 5361,"symbol": 8718,"interval": 7964,"symbolSize": 5300,"showSymbol": 1247,"inside": 8913,"xAxisIndex": 3843,"orient": 4205,"boundaryGap": 5073,"nameGap": 4896,"zoomLock": 571,"hoverAnimation": 2307,"legendHoverLink": 3553,"stack": 2907,"throttle": 466,"connectNulls": 897,"clipOverflow": 826,"startValue": 551,"minInterval": 3292,"opacity": 3097,"splitArea": 4775,"filterMode": 635,"end": 409,"left": 6475,"funnel": 2238,"lines": 6403,"baseline": 431,"align": 2608,"coord": 897,"nameTextStyle": 7477,"width": 4338,"shadowBlur": 4493,"effect": 929,"period": 225,"areaColor": 631,"borderWidth": 3654,"nameLocation": 4418,"position": 11723,"containLabel": 1701,"scatter": 10718,"areaStyle": 5310,"scale": 3859,"pieces": 414,"categories": 1000,"selectedMode": 3825,"itemSymbol": 273,"effectScatter": 7147,"fontStyle": 3376,"fontSize": 3386,"margin": 1034,"iconStyle": 2257,"link": 1366,"axisPointer": 5245,"showDelay": 896,"graph": 22194,"subtext": 1442,"selected": 2881,"barCategoryGap": 827,"barGap": 1094,"barWidth": 1521,"coordinateSystem": 3622,"barBorderRadius": 284,"z": 4014,"polarIndex": 1456,"shadowOffsetX": 3046,"shadowColor": 3771,"shadowOffsetY": 2475,"height": 1988,"barMinHeight": 575,"lang": 131,"symbolRotate": 2752,"symbolOffset": 2549,"showAllSymbol": 942,"transitionDuration": 993,"bottom": 3724,"fillerColor": 229,"nameMap": 1249,"barMaxWidth": 747,"radius": 2103,"center": 2425,"magicType": 3276,"labelPrecision": 248,"option": 654,"seriesIndex": 935,"controlPosition": 121,"itemGap": 3188,"padding": 3481,"shadowStyle": 347,"boxplot": 1394,"labelFormatter": 264,"realtime": 631,"dataBackgroundColor": 239,"showDetail": 247,"showDataShadow": 217,"x": 684,"valueDim": 499,"onZero": 931,"right": 3255,"clockwise": 1035,"itemWidth": 1732,"trigger": 3840,"axis": 379,"selectedOffset": 670,"startAngle": 1293,"minAngle": 590,"top": 4637,"avoidLabelOverlap": 870,"labelLine": 3785,"sankey": 2933,"endAngle": 213,"start": 779,"roam": 1738,"fontWeight": 2828,"fontFamily": 2490,"subtextStyle": 2066,"indicator": 853,"sublink": 708,"zoom": 1038,"subtarget": 659,"length": 1060,"itemSize": 505,"controlStyle": 452,"yAxisIndex": 2529,"edgeLabel": 1188,"radiusAxisIndex": 354,"scaleLimit": 1313,"geoIndex": 535,"regions": 1892,"itemHeight": 1290,"nodes": 644,"candlestick": 3166,"crossStyle": 466,"edges": 369,"links": 3277,"layout": 846,"barBorderColor": 721,"barBorderWidth": 498,"treemap": 3865,"y": 367,"valueIndex": 704,"showLegendSymbol": 482,"mapValueCalculation": 492,"optionToContent": 264,"handleColor": 187,"handleSize": 271,"showContent": 1853,"angleAxisIndex": 406,"endValue": 327,"triggerOn": 1720,"contentToOption": 169,"buttonColor": 71,"rotate": 1144,"hoverLink": 335,"outOfRange": 491,"textareaColor": 58,"textareaBorderColor": 58,"textColor": 60,"buttonTextColor": 66,"category": 336,"hideDelay": 786,"alwaysShowContent": 1267,"extraCssText": 901,"effectType": 277,"force": 1820,"rippleEffect": 723,"edgeSymbolSize": 329,"showEffectOn": 271,"gravity": 199,"edgeLength": 193,"layoutAnimation": 152,"length2": 169,"enterable": 957,"dim": 83,"readOnly": 143,"levels": 444,"textGap": 256,"pixelRatio": 84,"nodeScaleRatio": 232,"draggable": 249,"nodeWidth": 49,"color0": 62,"layoutIterations": 56,"nodeGap": 54,"color(Array": 76,"<string>)":777};
+        var data = [];
+		for (var name in keywords) {
+			data.push({
+				name: name,
+				value: Math.sqrt(keywords[name])
+			})
+		}
+		var maskImage = new Image();
+		maskImage.src = '../../e/i/logo.png';
+			var option = {
+				series: [ {
+					type: 'wordCloud',
+					sizeRange: [10, 100],
+					rotationRange: [-90, 90],
+					rotationStep: 45,
+					gridSize: 2,
+					shape: 'pentagon',
+					maskImage: maskImage,
+					drawOutOfBound: false,
+					textStyle: {
+						normal: {
+							color: function () {
+								return 'rgb(' + [
+									Math.round(Math.random() * 160),
+									Math.round(Math.random() * 160),
+									Math.round(Math.random() * 160)
+								].join(',') + ')';
+							}
+						},
+						emphasis: {
+							color: 'red'
+						}
+					},
+					data: data.sort(function (a, b) {
+						return b.value  - a.value;
+					})
+				} ]
+			};
+            maskImage.onload = function () {
+                option.series[0].maskImage;chart.showLoading();
+                chart.setOption(option);
+                setTimeout(function(){chart.hideLoading()},3000)
+            }
+		}
+	</script>
+	</body>
+</html>
