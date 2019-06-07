@@ -1,0 +1,154 @@
+
+.wrapper{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 100px auto;
+}
+.wrapper .box{
+    width: 100%;
+    height: 100%;
+}
+.wrapper .box img{
+    width: 100%;
+}
+.wrapper .btn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -65px;
+    margin-left: -65px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.wrapper .btn img{
+    position: absolute;
+    top: -20px;
+    width: 130px;left:2px;
+}
+.wrapper main {
+    width: 400px;
+    height: 400px;
+
+    /* border: 1px solid black; */
+    position: relative;
+}
+
+.wrapper main div {
+    /* 设置4个小叶片的整体样式 */
+    width: 150px;
+    height: 150px;
+    /* 设置绝对定位，相对于他的父元素 main */
+    position: absolute;
+    box-sizing: border-box;
+    transition: 0.5s;
+    background: rgba(0, 0, 0, 0.493);
+    text-align: center;
+    line-height: 150px;
+    color: rgba(255, 255, 255, 0.849);
+    font-size: 35px;
+    /* 设置小手样式 */
+    cursor: pointer;
+}
+
+.wrapper .one:hover,
+.wrapper .two:hover {
+    /* 当鼠标经过 医疗 饮食时，出现阴影，并往上移动10px */
+    box-shadow: 0 0 10px rgb(102, 98, 98);
+    transform: translateY(-10px);
+}
+
+.wrapper .three:hover,
+.wrapper .four:hover {
+    /* 当鼠标经过 运动 消费时，出现阴影，并往下移动10px */
+    box-shadow: 0 0 10px rgb(102, 98, 98);
+    transform: translateY(10px);
+}
+
+.wrapper .one {
+    /* 初始样式 */
+    /* 给医疗小叶片定位 */
+    left: 45px;
+    top: 45px;
+    /* 设置右上角和左下角样式 */
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    background: rgba(238, 10, 10, 0.644);
+}
+
+.wrapper .ones {
+    /* 点击要调用的样式 */
+    left: 0px;
+    top: 0px;
+    text-shadow: 5px 5px 5px rgb(56, 55, 55);
+    background: rgba(238, 10, 10, 0.986);
+}
+
+.wrapper .two {
+    /* 初始样式 */
+    /* 给饮食小叶片定位 */
+    right: 45px;
+    top: 45px;
+    /* 设置左上角和右下角样式 */
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background: rgba(252, 235, 3, 0.863);
+}
+
+.wrapper .twos {
+    /* 点击要调用的样式 */
+    right: 0px;
+    top: 0px;
+    text-shadow: -5px 5px 5px rgb(56, 55, 55);
+    background: rgba(252, 235, 3, 0.863);
+}
+
+.wrapper .three {
+    /* 初始样式 */
+    /* 给运动小叶片定位 */
+    left: 45px;
+    bottom: 45px;
+    /* 设置左上角和右下角样式 */
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background: rgba(149, 247, 3, 0.877);
+}
+
+.wrapper .threes {
+    /* 点击要调用的样式 */
+    left: 0;
+    bottom: 0;
+    text-shadow: 5px -5px 5px rgb(56, 55, 55);
+    background: rgba(149, 247, 3, 0.877);
+}
+
+.wrapper .four {
+    /* 初始样式 */
+    /* 给消费小叶片定位 */
+    bottom: 45px;
+    right: 45px;
+    /* 设置右上角和左下角样式 */
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    background: rgba(5, 190, 247, 0.856);
+}
+
+.wrapper .fours {
+    /* 点击要调用的样式 */
+    bottom: 0;
+    right: 0;
+    text-shadow: -5px -5px 5px rgb(56, 55, 55);
+    background: rgba(5, 190, 247, 0.856);
+}
+
+.wrapper .ones,
+.wrapper .twos,
+.wrapper .threes,
+.wrapper .fours {
+    /* 设置被调用的公共样式 */
+    border: 3px solid white;
+    color: white;
+    border-radius: 80%;
+}

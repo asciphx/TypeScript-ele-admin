@@ -1,0 +1,498 @@
+<%include ../../taglib.ejs %>
+<html>
+<head>
+<meta http-equiv="Content-type;X-UA-Compatible" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="StyleSheet" href="../../resource/h-ui/mine.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="..\..\css\flv.css" />
+<link rel="stylesheet" type="text/css" href="xzmf.css" />
+<script type="text/javascript" src="..\..\js\page.js"></script>
+<script type="text/javascript" src="..\..\js\flv.js"></script>
+<title>MarkDown2PDF</title>
+<style type="text/css">table.table {margin:4px 6px 3px;font-family: "微软雅黑";}
+  body{
+      background: #080808;
+      text-align: center;
+      color: white;
+  }
+  .container{
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 100px auto 60px;
+      perspective: 1000px;
+  }
+  .container .cube{
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  .container .cube img{
+      width: 100%;
+      height: 100%;
+      /* display: block; */
+  }
+  .container .cube li{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+  }
+  
+  .img1{
+      transform: translateZ(150px);
+  }
+  .img2{
+      transform: rotateX(-180deg) translateZ(151px);
+  }
+  .img3{
+      transform: rotateY(90deg) translateZ(150px);
+  }
+  .img4{
+      transform: rotateY(-90deg) translateZ(150px);
+  }
+  .img5{
+      transform: rotateX(90deg) translateZ(150px);
+  }
+  
+  .img6{
+      transform: rotateX(-90deg) translateZ(150px);
+  }
+  
+  .cube.init{
+      transform: translateZ(-150px) rotateX(-15deg) rotateY(18deg);
+  }
+  
+  .btnList{
+      display: grid;
+      grid-template-columns: 105px 105px 105px;
+      grid-template-rows: 80px 80px;
+      justify-content: center;
+      grid-gap: 15px;
+  }
+  .btnList input{
+      width: 105px;
+      outline: none;
+      border: 2px solid #fafafa;
+  }
+  h2{
+      margin-bottom: 50px;
+  }
+  .btnList input:focus{
+      border: 2px solid #ac670c;
+  
+  }
+  .cube.show-image-1{
+      transform: translateZ(-150px);
+  }
+  .cube.show-image-2{
+      transform: translateZ(-150px) rotateX(180deg);
+  }
+  .cube.show-image-3{
+      transform: translateZ(-150px) rotateY(-90deg);
+  }
+  .cube.show-image-4{
+      transform: translateZ(-150px) rotateY(90deg);
+  }
+  .cube.show-image-5{
+      transform: translateZ(-150px) rotateX(-90deg);
+  }
+  .cube.show-image-6{
+      transform: translateZ(-150px) rotateX(90deg);
+  }
+    .rocket-con{position:fixed;background:url(img/rocket_top.png);width:125px;height:150px;cursor:pointer;z-index:99;bottom:0;left:50%;margin-left:490px}
+.fly{animation:fly .4s steps(1) infinite;background-image:url(img/rocket_frame.png)}@keyframes fly{0%{background-position-x:0}25%{background-position-x:-150px}50%{background-position-x:-300px}75%{background-position-x:-450px}to{background-position-x:-600px}}
+</style>
+</head>
+<body>
+    <table class= "table">
+        <tr class= "biao_ti" height="6%">
+            <td colspan= "2">
+            <button id="userPhotoGroup"onclick="window.parent.frames['xzmf'].frameElement.src=window.parent.frames['xzmf'].frameElement.src">↻</button>
+            <%-Blood%>
+            <%-ID_TYPE%>
+            <%-USER_TYPE%></td>
+        </tr>
+        <tr><td>
+            <div id="No_plans-no_again-no_chance-no_gain-" style="left:75%;position:absolute;border: 1px solid #CCC; width: 100px; height: 100px; background: #999;"></div></td></tr>
+    </table>
+    <div class="container">
+        <ul class="cube init">
+            <li class="img1"><img src="img/1.jpg"  alt=""></li>
+            <li class="img2"><img src="img/2.jpg"  alt=""></li>
+            <li class="img3"><img src="img/3.gif"   alt=""></li>
+            <li class="img4"><img src="img/4.jpg"  alt=""></li>
+            <li class="img5"><img src="img/5.gif"  alt=""></li>
+            <li class="img6"><img src="img/6.gif"  alt=""></li>
+        </ul>
+    </div>
+
+    <h2>请点击下列图片方块</h2>
+    <ul class="btnList">
+        <li><input type="image" src="img/1.jpg" class="show-image-1"></li>
+        <li><input type="image" src="img/2.jpg" class="show-image-2"></li>
+        <li><input type="image" src="img/3.gif" class="show-image-3"></li>
+        <li><input type="image" src="img/4.jpg" class="show-image-4"></li>
+        <li><input type="image" src="img/5.gif" class="show-image-5"></li>
+        <li><input type="image" src="img/6.gif" class="show-image-6"></li>
+    </ul>
+    <div class="mainContainer" style="margin-top: 60px;">
+        <div>
+            <div id="streamURL">
+                <div class="url-input">
+                    <label for="sURL">Stream URL:</label>
+                    <input id="sURL" type="text" value="" />
+                    <button onclick="switch_mds()">Switch to MediaDataSource</button>
+                </div>
+                <div class="options">
+                    <input type="checkbox" id="isLive" onchange="saveSettings()" />
+                    <label for="isLive">isLive</label>
+                    <input type="checkbox" id="withCredentials" onchange="saveSettings()" />
+                    <label for="withCredentials">withCredentials</label>
+                    <input type="checkbox" id="hasAudio" onchange="saveSettings()" checked />
+                    <label for="hasAudio">hasAudio</label>
+                    <input type="checkbox" id="hasVideo" onchange="saveSettings()" checked />
+                    <label for="hasVideo">hasVideo</label>
+                </div>
+            </div>
+            <div id="mediaSourceURL" class="hidden">
+                <div class="url-input">
+                    <label for="msURL">MediaDataSource JsonURL:</label>
+                    <input id="msURL" type="text" value="http://127.0.0.1/flv/7182741.json" />
+                    <button onclick="switch_url()">Switch to URL</button>
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div>
+                <video name="videoElement" class="centeredVideo" controls autoplay>
+                    Your browser is too old which doesn't support HTML5 video.
+                </video>
+            </div>
+        </div>
+        <div class="controls">
+            <button onclick="flv_load()">Load</button>
+            <button onclick="flv_start()">Start</button>
+            <button onclick="flv_pause()">Pause</button>
+            <button onclick="flv_destroy()">Destroy</button>
+            <input style="width:100px" type="text" name="seekpoint"/>
+            <button onclick="flv_seekto()">SeekTo</button>
+        </div>
+        <textarea name="logcatbox" class="logcatBox" rows="10" readonly></textarea>
+    </div>
+   <div class="wrapper">
+        <div class="box">
+            <img src="./img/pan.png" alt="">
+        </div>
+        <div class="btn">
+            <img src="./img/btn.png" alt="">
+        </div>
+        <main>
+        <div class="one">医疗</div>
+        <div class="two">饮食</div>
+        <div class="three">运动</div>
+        <div class="four">消费</div>
+    </main>
+   </div>
+    <div class="rocket-con" onmouseover="this.className='rocket-con fly'" onclick="document.body.scrollTop=0" onmouseout="this.className='rocket-con'" style=""></div>
+<div class="clean">
+    <script>(function (win, $) {
+        var defaultPar = {
+            rotateNum: 5,
+            body: 'body',
+            button: '.btn',
+            rotateBox: '.box',
+            clickCb: function(){},
+            renderCb: function(){}
+        }
+        //只是将Lottery方法放到了window对象上，在这个立即执行函数中产生了闭包，只留给了外部一个接口不占用变量名。是企业开发的一种手段
+        win.Lottery = Lottery;
+        function Lottery(pars) {
+            this.pars = $.extend(true, {}, defaultPar, pars);
+            this.isGoing = false;
+            this.init();
+        }
+        Lottery.prototype.init = function () {
+            var _this = this;
+            //点击事件绑定  
+            $(this.pars.body).on('click', this.pars.button, function(){
+                _this.isGoing = true;
+                _this.pars.clickCb();
+            })
+            //旋转结束事件绑定
+            $(this.pars.body).find(this.pars.rotateBox)[0].addEventListener('webkitTransitionEnd',function(){
+                var deg = $(_this.pars.body).attr('data-deg');
+                _this.pars.renderCb(deg);   //调用判定并提示抽奖结果函数
+                //以下代码是为了下一次抽奖，因为每次点击后图片停留的位置都不是初始的0位置，需要将旋转角度设置为deg(0~360deg)。不然下次旋转他就只转一点点，甚至往回转
+                $(_this.pars.body).find(_this.pars.rotateBox).css({
+                    transform: 'rotate(' + deg + 'deg)',
+                    transition: ''
+                })
+            })
+        }
+        Lottery.prototype.goRotate = function (deg) {
+            _this = this;
+            rotateEnd = this.pars.rotateNum * 360 + deg;
+            //旋转
+            $(this.pars.body).find(this.pars.rotateBox).css({
+                transform: 'rotate(' + rotateEnd + 'deg)',
+                transition: 'all 5s ease-out'
+            })
+            //记录当前旋转后停下来的值
+            $(this.pars.body).attr('data-deg',deg);
+        }
+        
+    })(window, $);
+    var pars = {
+        rotateNum: 5,
+        body: '.wrapper',
+        button: '.btn',
+        rotateBox: '.box',
+        clickCb: clickCbFun,
+        renderCb: renderCbFun
+    };
+    
+    var lottery = new Lottery(pars);
+    function clickCbFun() {
+        var random = Math.floor(Math.random() * 360);
+        lottery.goRotate(random);
+    };
+    function renderCbFun(deg) {
+        var str = '';
+        if(deg >= 0 && deg < 45) {
+            str = '二等奖';
+        }else if(deg >= 45 && deg < 90 || deg >= 135 && deg < 180 || deg >= 225 && deg < 270 || deg >= 315 && deg < 360) {
+            str = '四等奖';
+        }else if(deg >= 90 && deg < 135 || deg >= 270 && deg < 315) {
+            str = '三等奖';
+        }else if(deg >= 180 && deg < 225) {
+            str = '一等奖';
+        }
+        alert('恭喜你获得'+str);
+    };
+        // 当点击医疗时调用方法
+        $('.one').click(function () {
+            // 判断语句
+            // 如果当前样式为  .one时
+            if ($(this).attr('class') == 'one') {
+                // 则点击时调用的为 .ones 样式
+                $(this).attr('class', 'ones')
+                //    背景颜色改变
+                $('body').css({ background: 'rgba(247, 114, 114, 0.986)' })
+            } else {//否则，也就是说当前为 .ones样式时，点击调用的是 .one样式
+
+                //这样可以实现重复点击效果
+                $(this).attr('class', 'one')
+                //使背景颜色变白
+                $('body').css({ background: '#000' })
+            }
+        })
+        $('.two').click(function () {
+            if ($(this).attr('class') == 'two') {
+                $(this).attr('class', 'twos')
+                $('body').css({ background: 'rgb(245, 245, 129)' })
+            } else {
+                $(this).attr('class', 'two')
+                $('body').css({ background: '#000' })
+            }
+        })
+        $('.three').click(function () {
+            if ($(this).attr('class') == 'three') {
+                $(this).attr('class', 'threes')
+                $('body').css({ background: 'rgb(193, 245, 115)' })
+            } else {
+                $(this).attr('class', 'three')
+                $('body').css({ background: '#000' })
+            }
+        })
+        $('.four').click(function () {
+            if ($(this).attr('class') == 'four') {
+                $(this).attr('class', 'fours')
+                $('body').css({ background: 'rgb(133, 219, 245)' })
+            } else {
+                $(this).attr('class', 'four')
+                $('body').css({ background: '#000' })
+            }
+        })
+    var checkBoxFields = ['isLive', 'withCredentials', 'hasAudio', 'hasVideo'];
+    var streamURL, mediaSourceURL;document.getElementById('sURL').value='http\://'+document.location.host+'/5.f4v';
+    function flv_load() {
+        console.log('isSupported: ' + flvjs.isSupported());
+        if (mediaSourceURL.className === '') {
+            var url = document.getElementById('msURL').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onload = function (e) {
+                var mediaDataSource = JSON.parse(xhr.response);
+                flv_load_mds(mediaDataSource);
+            }
+            xhr.send();
+        } else {
+            var i;
+            var mediaDataSource = {
+                type: 'flv'
+            };
+            for (i = 0; i < checkBoxFields.length; i++) {
+                var field = checkBoxFields[i];
+                /** @type {HTMLInputElement} */
+                var checkbox = document.getElementById(field);
+                mediaDataSource[field] = checkbox.checked;
+            }
+            mediaDataSource['url'] = document.getElementById('sURL').value;
+            console.log('MediaDataSource', mediaDataSource);
+            flv_load_mds(mediaDataSource);
+        }
+    }
+
+    function flv_load_mds(mediaDataSource) {
+        var element = document.getElementsByName('videoElement')[0];
+        if (typeof player !== "undefined") {
+            if (player != null) {
+                player.unload();
+                player.detachMediaElement();
+                player.destroy();
+                player = null;
+            }
+        }
+        player = flvjs.createPlayer(mediaDataSource, {
+            enableWorker: false,
+            lazyLoadMaxDuration: 3 * 60,
+            seekType: 'range',
+        });
+        player.attachMediaElement(element);
+        player.load();
+    }
+
+    function flv_start() {
+        player.play();
+    }
+
+    function flv_pause() {
+        player.pause();
+    }
+
+    function flv_destroy() {
+        player.pause();
+        player.unload();
+        player.detachMediaElement();
+        player.destroy();
+        player = null;
+    }
+
+    function flv_seekto() {
+        var input = document.getElementsByName('seekpoint')[0];
+        player.currentTime = parseFloat(input.value);
+    }
+
+    function switch_url() {
+        streamURL.className = '';
+        mediaSourceURL.className = 'hidden';
+        saveSettings();
+    }
+
+    function switch_mds() {
+        streamURL.className = 'hidden';
+        mediaSourceURL.className = '';
+        saveSettings();
+    }
+
+    function ls_get(key, def) {
+        try {
+            var ret = localStorage.getItem('flvjs_demo.' + key);
+            if (ret === null) {
+                ret = def;
+            }
+            return ret;
+        } catch (e) {}
+        return def;
+    }
+
+    function ls_set(key, value) {
+        try {
+            localStorage.setItem('flvjs_demo.' + key, value);
+        } catch (e) {}
+    }
+
+    function saveSettings() {
+        if (mediaSourceURL.className === '') {
+            ls_set('inputMode', 'MediaDataSource');
+        } else {
+            ls_set('inputMode', 'StreamURL');
+        }
+        var i;
+        for (i = 0; i < checkBoxFields.length; i++) {
+            var field = checkBoxFields[i];
+            /** @type {HTMLInputElement} */
+            var checkbox = document.getElementById(field);
+            ls_set(field, checkbox.checked ? '1' : '0');
+        }
+        var msURL = document.getElementById('msURL');
+        var sURL = document.getElementById('sURL');
+        ls_set('msURL', msURL.value);
+        ls_set('sURL', sURL.value);
+        console.log('save');
+    }
+
+    function loadSettings() {
+        var i;
+        for (i = 0; i < checkBoxFields.length; i++) {
+            var field = checkBoxFields[i];
+            /** @type {HTMLInputElement} */
+            var checkbox = document.getElementById(field);
+            var c = ls_get(field, checkbox.checked ? '1' : '0');
+            checkbox.checked = c === '1' ? true : false;
+        }
+        if (ls_get('inputMode', 'StreamURL') === 'StreamURL') {
+            switch_url();
+        } else {
+            switch_mds();
+        }
+    }
+
+    function showVersion() {
+        var version = flvjs.version;
+        document.title = document.title + " (v" + version + ")";
+    }
+
+    var logcatbox = document.getElementsByName('logcatbox')[0];
+    flvjs.LoggingControl.addLogListener(function(type, str) {
+        logcatbox.value = logcatbox.value + str + '\n';
+        logcatbox.scrollTop = logcatbox.scrollHeight;
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        streamURL = document.getElementById('streamURL');
+        mediaSourceURL = document.getElementById('mediaSourceURL');
+        loadSettings();
+        showVersion();
+        flv_load();
+    });
+      (function(){
+          var btn_images = document.getElementsByTagName('input');
+          var cubeNode= document.getElementsByClassName('cube')[0];
+          var ClassList = cubeNode.classList;
+          var currentClass = ClassList[1];
+          for(var i = 0,len = btn_images.length;i<len;i++){
+            btn_images[i].addEventListener('click',clickFn)
+            }
+      function clickFn(e){
+          var target_ClassName = e.target.className;
+          if(target_ClassName!=currentClass){
+              ClassList.replace(currentClass,target_ClassName);
+              currentClass = target_ClassName;
+          }
+      }})();var i = 0;
+      setInterval(function () {
+          i++;if (i == 6){i = 0;}
+          $(".btnList li input").eq(i).click();
+      }, 3000);
+    document.getElementById("No_plans-no_again-no_chance-no_gain-").onmouseover=function(){
+      delay.apply(this,[0.5,function(){
+        alert(this.id);this.innerHTML=this.id;
+      }]);
+    };A.$$$("clean");</script></div>
+</body>
+</html>

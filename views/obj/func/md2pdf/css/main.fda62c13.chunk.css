@@ -1,0 +1,7 @@
+#root,body,html{height:100%}
+body::-webkit-scrollbar,div::-webkit-scrollbar{width:5px;height:6px}
+body::-webkit-scrollbar-track,div::-webkit-scrollbar-track{background:#f6f6f6;border-radius:2px;}
+body::-webkit-scrollbar-thumb,div::-webkit-scrollbar-thumb{background:#aaa;border-radius:2px;}
+body::-webkit-scrollbar-thumb:hover,div::-webkit-scrollbar-thumb:hover{background:#747474;}
+body::-webkit-scrollbar-corner,div::-webkit-scrollbar-corner{background:#f6f6f6;}
+/*# sourceMappingURL=main.fda62c13.chunk.css.map */
