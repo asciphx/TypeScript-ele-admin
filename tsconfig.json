@@ -1,0 +1,13 @@
+{
+   "compilerOptions": {
+      "lib": ["es5", "es6"],
+      "allowJs": true,
+      "target": "es6",
+      "module": "commonjs",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "declaration": false
+   }
+}
