@@ -30,7 +30,7 @@
 | pic                                     存储上传的资源文件
 +-------------+--------------+----------------------------+
 首先全局安装yarn，typescript,typeorm,ts-node，其次	npm i然后npm start即可启动，或者是选中index.ts文件后在vsCode调试Ctrl+F5，
-views\obj\copyRight.ejs这个 文件是专用的模板文件，拷贝到与func或person的同级目录下才能正常使用。
+views\obj\copyRight.ejs这个 文件是专用的模板文件，拷贝到与func或person的同级目录下才能正常使用。在线演示的地址www.91huanwei.com/
 暂时的话，某些代码仍然属于机密，不过后端的代码已经很完善了，可以供参考。前端架构也非常清晰，可以使用~
 这是一个[ORM](https://en.wikipedia.org/wiki/Object-relational_mapping)框架，它可以运行在 NodeJS、Browser、Cordova、PhoneGap、Ionic、React Native、Expo 和 Electron 平台上，可以与 TypeScript 和 JavaScript (ES5,ES6,ES7,ES8)一起使用。 它的目标是始终支持最新的 JavaScript 特性并提供额外的特性以帮助你开发任何使用数据库的（不管是只有几张表的小型应用还是拥有多数据库的大型企业应用）应用程序。
 
