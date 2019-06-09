@@ -4,44 +4,39 @@
 <head>
 <title>信息内容功能</title>
 </head>
-<body>
-	<form id="form1" name="form1" action="" method="post">
-			<table class="mobile" style="width: 95%;max-width:300px;position: fixed;margin: 0 23%;background: aliceblue;">
-				<tr class="pageheader">
-					<td colspan="2"><strong>信息处理[密碼最大長度15位！]</strong></td>
-				</tr>
-				<tr height="25">
-					<td class="outDetail" style="width: 30%">旧密码： <label
-						style="font-weight: bold; color: red"> * </label></td>
-					<td class="outDetail2"><input type="password" id="oldPassword"
-						 name="oldPassword" maxlength=15/></td>
-				</tr>
-				<tr height="25">
-					<td class="outDetail" style="width: 30%">新密码： <label
-						style="font-weight: bold; color: red"> * </label></td>
-					<td class="outDetail2"><input type="password" id="newPassword"
-						 name="newPassword" maxlength=15/></td>
-				</tr>
-				<tr height="25">
-					<td class="outDetail" style="width: 30%">新密码确认： <label
-						style="font-weight: bold; color: red"> * </label></td>
-					<td class="outDetail2"><input type="password" id="newPasswordConfirm"
-						 name="newPasswordConfirm" maxlength=15/></td>
-				</tr>
-				<tr height="25"><td class="outDetail2"><p align="center"><input type="button" class="btn" value="保  存"
-					onclick="save(this);" /></p></td>
-				</tr>
-				
-			</table>
-	</form><canvas id="mom" style="background:#111"></canvas>
+<body style="overflow: hidden;"><canvas id="mom" style="background:#111;position: fixed;"></canvas>
+	<table class="mobile" style="max-width: 340px;position: relative;margin: 0 auto;background: aliceblue;">
+		<tr class="pageheader">
+			<td colspan="2"><strong>信息处理[密碼最大長度15位！]</strong></td>
+		</tr>
+		<tr height="25">
+			<td class="outDetail" style="width: 30%">旧密码：<label
+				style="font-weight: bold; color: red">*</label></td>
+			<td class="outDetail2"><input type="password" id="oldPassword"
+				 name="oldPassword" maxlength=15/></td>
+		</tr>
+		<tr height="25">
+			<td class="outDetail" style="width: 30%">新密码：<label
+				style="font-weight: bold; color: red">*</label></td>
+			<td class="outDetail2"><input type="password" id="newPassword"
+				 name="newPassword" maxlength=15/></td>
+		</tr>
+		<tr height="25">
+			<td class="outDetail" style="width: 30%">新密码确认：<label
+				style="font-weight: bold; color: red">*</label></td>
+			<td class="outDetail2"><input type="password" id="newPasswordConfirm"
+				 name="newPasswordConfirm" maxlength=15/></td>
+		</tr>
+		<tr height="25"><td class="outDetail2"><p align="center"><input type="button" class="btn" value="保  存"
+			onclick="save(this);" /></p></td>
+		</tr>
+		
+	</table>
     <script>
         var canvas = document.getElementById("mom");
 		var context = canvas.getContext("2d"); 
         var W = window.parent.innerWidth;
-        var H = window.parent.innerHeight-100;
-		if( window.parent.document.querySelector('body > div.cl.Hui-main > aside').style.display!='none'&&W>800){
-			W=W-220;
-		}
+        var H = window.parent.innerHeight+170;
         canvas.width = W;
         canvas.height = H;
         var fontSize = 16;
